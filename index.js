@@ -65,9 +65,9 @@ const getLatestSprintSummary = async (
   });
   const { properties } = response.results[0];
   const { Sprint, Start, End } = properties;
-  log.info(
-    JSON.stringify({ message: "mySprint:", Sprint })
-  );
+//   log.info(
+//     JSON.stringify({ message: "mySprint:", Sprint })
+//   );
   return {
     sprint: Sprint.multi_select[0].name,
     start: moment(Start.date.start),
@@ -100,9 +100,9 @@ const countPointsLeftInSprint = async (
     }
   });
   const sprintStories = response.results;
-  log.info(
-    JSON.stringify({ message: "mysprintStories:", sprintStories })
-  );
+//   log.info(
+//     JSON.stringify({ message: "mysprintStories:", sprintStories })
+//   );
   const ongoingStories = sprintStories.filter(
     (item) =>
       !new RegExp(statusExclude).test(item.properties.Status.select.name)
@@ -132,13 +132,21 @@ const updateDailySummaryTable = async (
         title: [
           {
             text: {
-              content: `Sprint ${sprint} - ${today}`,
+              content: `${sprint} - ${today}`,
             },
           },
         ],
       },
       Sprint: {
-        name: sprint,
+        type: multi_select,
+        multi_select:{
+          options:[
+            {
+              name:`${sprint}`,
+              color:"blue"
+            }
+          ]
+        }
       },
       Points: {
         number: pointsLeft,
