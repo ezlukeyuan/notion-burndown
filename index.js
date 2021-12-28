@@ -123,10 +123,6 @@ const updateDailySummaryTable = async (
   pointsLeft
 ) => {
   const today = moment().startOf("day").format("YYYY-MM-DD");
-  log.info(JSON.stringify({ message:"mytoday:",today }));
-  log.info(JSON.stringify({ message:"mysprint:",sprint }));
-  log.info(JSON.stringify({ message:"mypointsLeft:",pointsLeft }));
-  log.info(JSON.stringify({ message:"mydailySummaryDb:",dailySummaryDb }));
   const create_result = await notion.pages.create({
     parent: {
       database_id: dailySummaryDb,
@@ -136,21 +132,18 @@ const updateDailySummaryTable = async (
         title: [
           {
             text: {
-              content: `1111`,
+              content: `${today}`,
             },
           },
         ],
       },
 //       Sprint: {
-//         type: "multi_select",
-//         multi_select:{
-//           options:[
+//         multi_select:[
 //             {
-//               name: `2222`,
+//               name: `${sprint}`,
 //               color:"blue"
-//             }
-//           ]
-//         }
+//             },
+//         ]
 //       },
       Points: {
         number: pointsLeft,
@@ -339,7 +332,7 @@ const getChartDatasets = async (
   end,
   { isIncludeWeekends }
 ) => {
-  log.info(JSON.stringify({ message:"enter:4"}));
+  
   const numDaysInSprint = moment(end).diff(start, "days") + 1;
   const lastFullDay = moment(end).add(-1, "days");
   const numWeekdays = getNumberOfWeekdays(start, lastFullDay);
@@ -459,7 +452,7 @@ const run = async () => {
       pointsLeftInSprint,
     })
   );
-  log.info(JSON.stringify({ message:"enter:2"}));
+
   await updateDailySummaryTable(
     notion.client,
     notion.databases.dailySummary,
@@ -473,7 +466,7 @@ const run = async () => {
       pointsLeftInSprint,
     })
   );
-  log.info(JSON.stringify({ message:"enter:3"}));
+
   const {
     labels,
     pointsLeftByDay: data,
