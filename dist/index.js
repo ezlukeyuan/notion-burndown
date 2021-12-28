@@ -17800,15 +17800,15 @@ const countPointsLeftInSprint = async (
     database_id: backlogDb,
     filter: {
       property: sprintProp,
-      select: {
-        equals: `${sprint}`,
+      multi_select: {
+        contains: `${sprint}`,
       },
     },
   });
   const sprintStories = response.results;
   const ongoingStories = sprintStories.filter(
     (item) =>
-      !new RegExp(statusExclude).test(item.properties.Status.select.name)
+      !new RegExp(statusExclude).test(item.properties.Status.multi_select.name)
   );
   return ongoingStories.reduce((accum, item) => {
     if (item.properties[estimateProp]) {
