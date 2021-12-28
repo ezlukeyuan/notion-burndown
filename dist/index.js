@@ -17856,7 +17856,7 @@ const updateDailySummaryTable = async (
         ],
       },
       Sprint: {
-        type: multi_select,
+        type: "multi_select",
         multi_select:{
           options:[
             {
