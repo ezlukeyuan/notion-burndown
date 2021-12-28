@@ -19,12 +19,12 @@ jobs:
           NOTION_DB_SPRINT_SUMMARY: ${{ secrets.DATABASE_ID_SPRINT_SUMMARY }}
           NOTION_DB_DAILY_SUMMARY: ${{ secrets.DATABASE_ID_DAILY_SUMMARY }}
           NOTION_PROPERTY_SPRINT: Sprint
-          NOTION_PROPERTY_ESTIMATE: Estimate
+          NOTION_PROPERTY_ESTIMATE: StoryPoint
           NOTION_PROPERTY_PATTERN_STATUS_EXCLUDE: Completed
       - name: Commit burndown chart
         run: |
           git config --local user.email "luke.yuan@eztable.com"
-          git config --local user.name "luke.yuan"
+          git config --local user.name "ezlukeyuan"
           git add ./out
           git commit -m "run: upload new burndown chart"
       - name: Push changes
