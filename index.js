@@ -66,7 +66,7 @@ const getLatestSprintSummary = async (
   const { properties } = response.results[0];
   const { Sprint, Start, End } = properties;
   return {
-    sprint: Sprint.number,
+    sprint: Sprint,
     start: moment(Start.date.start),
     end: moment(End.date.start),
   };
@@ -83,7 +83,7 @@ const countPointsLeftInSprint = async (
     filter: {
       property: sprintProp,
       select: {
-        equals: `Sprint ${sprint}`,
+        equals: `${sprint}`,
       },
     },
   });
