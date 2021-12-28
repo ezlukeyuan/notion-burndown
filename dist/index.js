@@ -17859,23 +17859,23 @@ const updateDailySummaryTable = async (
           },
         ],
       },
-      Sprint: {
-        type: "multi_select",
-        multi_select:{
-          options:[
-            {
-              name: `2222`,
-              color:"blue"
-            }
-          ]
-        }
-      },
-      Points: {
-        number: pointsLeft,
-      },
-      Date: {
-        date: { start: today, end: null },
-      },
+//       Sprint: {
+//         type: "multi_select",
+//         multi_select:{
+//           options:[
+//             {
+//               name: `2222`,
+//               color:"blue"
+//             }
+//           ]
+//         }
+//       },
+//       Points: {
+//         number: pointsLeft,
+//       },
+//       Date: {
+//         date: { start: today, end: null },
+//       },
     },
   });
   
