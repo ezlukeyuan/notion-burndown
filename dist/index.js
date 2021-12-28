@@ -17917,6 +17917,7 @@ const getPointsLeftByDay = async (
   start,
   isIncludeWeekends
 ) => {
+  log.info(JSON.stringify({ message:"enter:1"}));
   const response = await notion.databases.query({
     database_id: dailySummaryDb,
     filter: {
@@ -18056,6 +18057,7 @@ const getChartDatasets = async (
   end,
   { isIncludeWeekends }
 ) => {
+  log.info(JSON.stringify({ message:"enter:4"}));
   const numDaysInSprint = moment(end).diff(start, "days") + 1;
   const lastFullDay = moment(end).add(-1, "days");
   const numWeekdays = getNumberOfWeekdays(start, lastFullDay);
@@ -18175,7 +18177,7 @@ const run = async () => {
       pointsLeftInSprint,
     })
   );
-
+  log.info(JSON.stringify({ message:"enter:2"}));
   await updateDailySummaryTable(
     notion.client,
     notion.databases.dailySummary,
@@ -18189,7 +18191,7 @@ const run = async () => {
       pointsLeftInSprint,
     })
   );
-
+  log.info(JSON.stringify({ message:"enter:3"}));
   const {
     labels,
     pointsLeftByDay: data,
