@@ -17843,6 +17843,8 @@ const updateDailySummaryTable = async (
   const today = moment().startOf("day").format("YYYY-MM-DD");
   log.info(JSON.stringify({ message:"mytoday:",today }));
   log.info(JSON.stringify({ message:"mysprint:",sprint }));
+  log.info(JSON.stringify({ message:"mypointsLeft:",pointsLeft }));
+  log.info(JSON.stringify({ message:"mydailySummaryDb:",dailySummaryDb }));
   const create_result = await notion.pages.create({
     parent: {
       database_id: dailySummaryDb,
@@ -17852,7 +17854,7 @@ const updateDailySummaryTable = async (
         title: [
           {
             text: {
-              content: `${sprint} - ${today}`,
+              content: `1111`,
             },
           },
         ],
@@ -17862,7 +17864,7 @@ const updateDailySummaryTable = async (
         multi_select:{
           options:[
             {
-              name:`${sprint}`,
+              name: `2222`,
               color:"blue"
             }
           ]
