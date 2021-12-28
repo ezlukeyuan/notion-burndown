@@ -2,7 +2,7 @@ name: on daily
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "*/5 * * * *"
 
 jobs:
   generate_burndown_chart:
@@ -15,16 +15,16 @@ jobs:
         uses: ./
         with:
           NOTION_KEY: ${{ secrets.NOTION_KEY }}
-          NOTION_DB_BACKLOG: 231c684795fd49aeb387e41110c2af83
-          NOTION_DB_SPRINT_SUMMARY: f762582562d34d6e8e2e4b89050c09be
-          NOTION_DB_DAILY_SUMMARY: ef4f661300064ee48a907a3d1348767b
+          NOTION_DB_BACKLOG: ${{ secrets.DATABASE_ID_BACKLOG }}
+          NOTION_DB_SPRINT_SUMMARY: ${{ secrets.DATABASE_ID_SPRINT_SUMMARY }}
+          NOTION_DB_DAILY_SUMMARY: ${{ secrets.DATABASE_ID_DAILY_SUMMARY }}
           NOTION_PROPERTY_SPRINT: Sprint
           NOTION_PROPERTY_ESTIMATE: Estimate
           NOTION_PROPERTY_PATTERN_STATUS_EXCLUDE: Completed
       - name: Commit burndown chart
         run: |
-          git config --local user.email "ting.szeying@gmail.com"
-          git config --local user.name "szenius"
+          git config --local user.email "luke.yuan@eztable.com"
+          git config --local user.name "luke.yuan"
           git add ./out
           git commit -m "run: upload new burndown chart"
       - name: Push changes
