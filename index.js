@@ -137,14 +137,14 @@ const updateDailySummaryTable = async (
           },
         ],
       },
-//       Sprint: {
-//         multi_select:[
-//             {
-//               name: `${sprint}`,
-//               color:"blue"
-//             },
-//         ]
-//       },
+      Sprint: {
+        multi_select:[
+            {
+              name: `${sprint}`,
+              color:"blue"
+            },
+        ]
+      },
       Points: {
         number: pointsLeft,
       },
