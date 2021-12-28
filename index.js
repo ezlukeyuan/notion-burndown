@@ -84,11 +84,20 @@ const countPointsLeftInSprint = async (
   const response = await notion.databases.query({
     database_id: backlogDb,
     filter: {
+      and:[
+    {
       property: sprintProp,
       multi_select: {
         contains: `${sprint}`,
       },
     },
+    {
+      property: "Status",
+      select: {
+        is_not_empty: true,
+      },
+    },]
+    }
   });
   const sprintStories = response.results;
   log.info(
