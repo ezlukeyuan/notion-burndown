@@ -123,7 +123,7 @@ const updateDailySummaryTable = async (
   pointsLeft
 ) => {
   const today = moment().startOf("day").format("YYYY-MM-DD");
-  await notion.pages.create({
+  const create_result = await notion.pages.create({
     parent: {
       database_id: dailySummaryDb,
     },
@@ -156,6 +156,9 @@ const updateDailySummaryTable = async (
       },
     },
   });
+  
+  log.info(JSON.stringify({ message:"mycreate_result:",create_result }));
+  
 };
 
 const isWeekend = (date) => {
