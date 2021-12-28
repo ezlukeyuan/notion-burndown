@@ -24,7 +24,7 @@ jobs:
       - name: Commit burndown chart
         run: |
           git config --local user.email "luke.yuan@eztable.com"
-          git config --local user.name "luke.yuan"
+          git config --local user.name "ezlukeyuan"
           git add ./out
           git commit -m "run: upload new burndown chart"
       - name: Push changes
