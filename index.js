@@ -123,6 +123,8 @@ const updateDailySummaryTable = async (
   pointsLeft
 ) => {
   const today = moment().startOf("day").format("YYYY-MM-DD");
+  log.info(JSON.stringify({ message:"mytoday:",today }));
+  log.info(JSON.stringify({ message:"mysprint:",sprint }));
   const create_result = await notion.pages.create({
     parent: {
       database_id: dailySummaryDb,
