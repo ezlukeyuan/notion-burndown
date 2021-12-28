@@ -69,7 +69,7 @@ const getLatestSprintSummary = async (
     JSON.stringify({ message: "mySprint:", Sprint })
   );
   return {
-    sprint: Sprint.options[0].name,
+    sprint: Sprint.multi_select[0].name,
     start: moment(Start.date.start),
     end: moment(End.date.start),
   };
