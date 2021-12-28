@@ -17859,17 +17859,17 @@ const updateDailySummaryTable = async (
           },
         ],
       },
-      Sprint: {
-        type: "multi_select",
-        multi_select:{
-          options:[
-            {
-              name: `2222`,
-              color:"blue"
-            }
-          ]
-        }
-      },
+//       Sprint: {
+//         type: "multi_select",
+//         multi_select:{
+//           options:[
+//             {
+//               name: `2222`,
+//               color:"blue"
+//             }
+//           ]
+//         }
+//       },
       Points: {
         number: pointsLeft,
       },
