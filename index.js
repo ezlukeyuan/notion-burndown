@@ -123,7 +123,7 @@ const updateDailySummaryTable = async (
         ],
       },
       Sprint: {
-        number: sprint,
+        name: sprint,
       },
       Points: {
         number: pointsLeft,
@@ -173,8 +173,8 @@ const getPointsLeftByDay = async (
     database_id: dailySummaryDb,
     filter: {
       property: "Sprint",
-      number: {
-        equals: sprint,
+      multi_select: {
+        contains: `${sprint}`,
       },
     },
     sorts: [
