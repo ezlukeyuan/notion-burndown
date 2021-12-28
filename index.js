@@ -66,7 +66,7 @@ const getLatestSprintSummary = async (
   const { properties } = response.results[0];
   const { Sprint, Start, End } = properties;
   return {
-    sprint: Sprint[0].name,
+    sprint: Sprint.options[0].name,
     start: moment(Start.date.start),
     end: moment(End.date.start),
   };
