@@ -155,9 +155,9 @@ const updateDailySummaryTable = async (
       Points: {
         number: pointsLeft,
       },
-//       Date: {
-//         date: { start: today, end: null },
-//       },
+      Date: {
+        date: { start: today, end: null },
+      },
     },
   });
   
