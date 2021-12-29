@@ -417,7 +417,7 @@ const generateChart = (data, idealBurndown, labels , demo, goal) => {
     }) // Line chart
     .backgroundColor("white")
     .width(500) // 500px
-    .height(300); // 300px
+    .height(400); // 300px
   return chart;
 };
 
