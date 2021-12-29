@@ -18101,11 +18101,11 @@ const generateChart = (data, idealBurndown, labels , demo, goal) => {
       options: {
         title: {
             display: true,
-            text: '燃盡圖',
+            text: goal.unshift('燃盡圖','Demo:'+ demo),
         },
         subtitle: {
             display: true,
-            text: goal.unshift('Demo:'+ demo),
+            text: goal.unshift('燃盡圖','Demo:'+ demo),
         },
         legend: { display: false },
         scales: {
