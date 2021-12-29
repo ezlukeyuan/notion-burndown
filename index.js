@@ -73,7 +73,7 @@ const getLatestSprintSummary = async (
     start: moment(Start.date.start),
     end: moment(End.date.start),
     demo: moment(DemoDate.date.start),
-    goal: Goal.rich_text[0].plain_text.replace('\n','|'),
+    goal: Goal.rich_text[0].plain_text.split('\n'),
   };
 };
 
@@ -359,7 +359,7 @@ const getChartDatasets = async (
   return { labels, pointsLeftByDay, idealBurndown };
 };
 
-const generateChart = (data, idealBurndown, labels , mytitle) => {
+const generateChart = (data, idealBurndown, labels , demo, goal) => {
   const chart = ChartJSImage()
     .chart({
       type: "line",
@@ -381,9 +381,15 @@ const generateChart = (data, idealBurndown, labels , mytitle) => {
         ],
       },
       options: {
-        title: {
-          display: true,
-          text: mytitle,
+        plugins: {
+            title: {
+                display: true,
+                text: '燃盡圖',
+            },
+            subtitle: {
+                display: true,
+                text: goal.unshift('Demo:'+ demo),
+            }
         },
         legend: { display: false },
         scales: {
@@ -483,8 +489,8 @@ const run = async () => {
     }
   );
   log.info(JSON.stringify({ labels, data, idealBurndown }));
-  let mytitle = "燃盡圖|Demo日期:" + demo +"|目標:" + goal ;
-  const chart = generateChart(data, idealBurndown, labels, mytitle);
+//   let mytitle = "燃盡圖|Demo日期:" + demo +"|目標:" + goal ;
+  const chart = generateChart(data, idealBurndown, labels, demo , goal);
 
   await writeChartToFile(chart, "./out", `sprint${sprint}-${Date.now()}`);
   await writeChartToFile(chart, "./out", `sprint${sprint}-latest`);
