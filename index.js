@@ -64,10 +64,10 @@ const getLatestSprintSummary = async (
     ],
   });
   const { properties } = response.results[0];
-  const { Sprint, Start, End } = properties;
-//   log.info(
-//     JSON.stringify({ message: "mySprint:", Sprint })
-//   );
+  const { Sprint, Start, End , DemoDate, Goal} = properties;
+  log.info(
+    JSON.stringify({ message: "DemoDate:", DemoDate ,Goal})
+  );
   return {
     sprint: Sprint.multi_select[0].name,
     start: moment(Start.date.start),
