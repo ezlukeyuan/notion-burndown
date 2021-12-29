@@ -72,6 +72,8 @@ const getLatestSprintSummary = async (
     sprint: Sprint.multi_select[0].name,
     start: moment(Start.date.start),
     end: moment(End.date.start),
+    demo: moment(DemoDate.date.start),
+    goal: Goal.rich_text[0].plain_text.replace('\n','|'),
   };
 };
 
@@ -357,7 +359,7 @@ const getChartDatasets = async (
   return { labels, pointsLeftByDay, idealBurndown };
 };
 
-const generateChart = (data, idealBurndown, labels) => {
+const generateChart = (data, idealBurndown, labels , mytitle) => {
   const chart = ChartJSImage()
     .chart({
       type: "line",
@@ -381,7 +383,7 @@ const generateChart = (data, idealBurndown, labels) => {
       options: {
         title: {
           display: true,
-          text: "Sprint Burndown",
+          text: mytitle,
         },
         legend: { display: false },
         scales: {
@@ -425,7 +427,7 @@ const writeChartToFile = async (chart, dir, filenamePrefix) => {
 const run = async () => {
   const { notion, chartOptions } = parseConfig();
 
-  const { sprint, start, end } = await getLatestSprintSummary(
+  const { sprint, start, end ,demo ,goal} = await getLatestSprintSummary(
     notion.client,
     notion.databases.sprintSummary,
     { sprintProp: notion.options.sprintProp }
@@ -481,7 +483,8 @@ const run = async () => {
     }
   );
   log.info(JSON.stringify({ labels, data, idealBurndown }));
-  const chart = generateChart(data, idealBurndown, labels);
+  let mytitle = "燃盡圖|Demo日期:" + demo +"|目標:" + goal ;
+  const chart = generateChart(data, idealBurndown, labels, mytitle);
 
   await writeChartToFile(chart, "./out", `sprint${sprint}-${Date.now()}`);
   await writeChartToFile(chart, "./out", `sprint${sprint}-latest`);
