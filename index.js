@@ -381,15 +381,13 @@ const generateChart = (data, idealBurndown, labels , demo, goal) => {
         ],
       },
       options: {
-        plugins: {
-            title: {
-                display: true,
-                text: '燃盡圖',
-            },
-            subtitle: {
-                display: true,
-                text: goal.unshift('Demo:'+ demo),
-            }
+        title: {
+            display: true,
+            text: '燃盡圖',
+        },
+        subtitle: {
+            display: true,
+            text: goal.unshift('Demo:'+ demo),
         },
         legend: { display: false },
         scales: {
