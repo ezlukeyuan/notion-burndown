@@ -18099,15 +18099,13 @@ const generateChart = (data, idealBurndown, labels , demo, goal) => {
         ],
       },
       options: {
-        plugins: {
-            title: {
-                display: true,
-                text: '燃盡圖',
-            },
-            subtitle: {
-                display: true,
-                text: goal.unshift('Demo:'+ demo),
-            }
+        title: {
+            display: true,
+            text: '燃盡圖',
+        },
+        subtitle: {
+            display: true,
+            text: goal.unshift('Demo:'+ demo),
         },
         legend: { display: false },
         scales: {
@@ -18137,7 +18135,7 @@ const generateChart = (data, idealBurndown, labels , demo, goal) => {
     }) // Line chart
     .backgroundColor("white")
     .width(500) // 500px
-    .height(300); // 300px
+    .height(400); // 300px
   return chart;
 };
 
