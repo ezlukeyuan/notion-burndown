@@ -18101,7 +18101,7 @@ const generateChart = (data, idealBurndown, labels , demo, goal) => {
       options: {
         title: {
             display: true,
-            text: moment() + ' 燃盡圖',
+            text: moment().startOf("day").format("YYYY-MM-DD") + ' 燃盡圖',
         },
 //         subtitle: {
 //             display: true,
