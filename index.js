@@ -1,12 +1,15 @@
 const { Client } = require("@notionhq/client");
+const { WebClient } = require('@slack/web-api');
 const moment = require("moment");
 const ChartJSImage = require("chart.js-image");
 const log = require("loglevel");
 const fs = require("fs");
 const core = require("@actions/core");
 
+
 log.setLevel("info");
 require("dotenv").config();
+
 
 const parseConfig = () => {
   if (process.env.NODE_ENV === "offline") {
@@ -495,6 +498,20 @@ const run = async () => {
   log.info(
     JSON.stringify({ message: "Generated burndown chart", sprint, data })
   );
+  
+  const web = new WebClient(process.env.SLACK_TOKEN);
+  // The current date
+  const currentTime = new Date().toTimeString();
+  try {
+    // Use the `chat.postMessage` method to send a message from this app
+    await web.chat.postMessage({
+      channel: '#general',
+      text: `The current time is ${currentTime}`,
+    });
+    log.info('Message posted!');
+  } catch (error) {
+    log.info(error);
+  }
 };
 
 run();
