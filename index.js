@@ -505,7 +505,7 @@ const run = async () => {
   try {
     // Use the `chat.postMessage` method to send a message from this app
     await web.chat.postMessage({
-      channel: '#general',
+      channel: 'C01TM4WSVH6',
       text: `The current time is ${currentTime}`,
     });
     log.info('Message posted!');
