@@ -37,6 +37,6 @@
     "lodash": "^4.17.21",
     "loglevel": "^1.7.1",
     "moment": "^2.29.1",
-    "@slack/web-api": "^6.5.1",
+    "@slack/web-api": "^6.5.1"
   }
 }
