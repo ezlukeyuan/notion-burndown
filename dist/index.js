@@ -26816,11 +26816,14 @@ const sendSlackMessage = async (filename) => {
   const web = new WebClient(core.getInput("SLACK_TOKEN"));
   // The current date
   const currentTime = new Date().toTimeString();
+  let image_url = `https://raw.githubusercontent.com/ezlukeyuan/notion-burndown/master/out/${filename}-burndown.png`;
+  let message =
+      [{"type":"image","title":{"type":"plain_text","text":"burndown","emoji":true},"image_url":"${image_url}","alt_text":"marg"}];
   try {
     // Use the `chat.postMessage` method to send a message from this app
     await web.chat.postMessage({
       channel: 'C0234HEGCT0',
-      text: `每日燃盡圖\nhttps://raw.githubusercontent.com/ezlukeyuan/notion-burndown/master/out/${filename}-burndown.png`,
+      blocks: message
     });
     log.info('Message posted!');
   } catch (error) {
@@ -26889,7 +26892,7 @@ const run = async () => {
   log.info(JSON.stringify({ labels, data, idealBurndown }));
 //   let mytitle = "燃盡圖|Demo日期:" + demo +"|目標:" + goal ;
   const chart = generateChart(data, idealBurndown, labels, demo , goal);
-  const mainfilename = `sprint${sprint}-${mainfilename}`;
+  let mainfilename = `sprint${sprint}-${Date.now()}`;
   await writeChartToFile(chart, "./out", mainfilename);
   await writeChartToFile(chart, "./out", `sprint${sprint}-latest`);
   log.info(
