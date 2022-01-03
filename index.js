@@ -518,7 +518,7 @@ const run = async () => {
   log.info(
     JSON.stringify({ message: "Generated burndown chart", sprint, data })
   );
-  await sendSlackMessage(mainfilename);
+  await sendSlackMessage(`sprint${sprint}-latest`);
 
 };
 
