@@ -436,13 +436,13 @@ const sendSlackMessage = async (filename) => {
   // The current date
   const currentTime = new Date().toTimeString();
   let image_url = `https://raw.githubusercontent.com/ezlukeyuan/notion-burndown/master/out/${filename}-burndown.png`;
-  let attachments = [{"title": "burndown", "image_url": image_url}]
+  let message =
+      [{"type":"image","title":{"type":"plain_text","text":"burndown","emoji":true},"image_url":"${image_url}","alt_text":"marg"}];
   try {
     // Use the `chat.postMessage` method to send a message from this app
     await web.chat.postMessage({
       channel: 'C0234HEGCT0',
-      text: `每日燃盡圖\n`,
-      attachments:attachments
+      blocks: message
     });
     log.info('Message posted!');
   } catch (error) {
