@@ -75,7 +75,7 @@ const getLatestSprintSummary = async (
     sprint: Sprint.multi_select[0].name,
     start: moment(Start.date.start),
     end: moment(End.date.start),
-    demo: moment(DemoDate.date.start),
+    demo: moment(DemoDate.date.start).startOf("day").format("YYYY-MM-DD"),
     goal: Goal.rich_text[0].plain_text.split('\n'),
   };
 };
@@ -437,8 +437,8 @@ const sendSlackMessage = async (filename,demo,goal) => {
   const currentTime = new Date().toTimeString();
   let image_url = `https://raw.githubusercontent.com/ezlukeyuan/notion-burndown/master/out/${filename}-burndown.png`;
   let message = JSON.stringify([{"type":"image","title":{"type":"plain_text","text":"burndown","emoji":true},"image_url":image_url,"alt_text":"marg"},
-                                {"type":"section","text":{"type":"mrkdwn","text":"<${image_url}|this is a link>"}},
-                                {"type":"section","text":{"type":"plain_text","text":"${filename}\nDemo日："+demo+"\n目標："+goal,"emoji":true}}]);
+                                {"type":"section","text":{"type":"mrkdwn","text":"<"+image_url+"|this is a link>"}},
+                                {"type":"section","text":{"type":"plain_text","text":filename+"\nDemo日："+demo+"\n目標："+goal,"emoji":true}}]);
   log.info("message:",message);
   try {
     // Use the `chat.postMessage` method to send a message from this app
