@@ -431,15 +431,16 @@ const writeChartToFile = async (chart, dir, filenamePrefix) => {
   await chart.toFile(`${dir}/${filenamePrefix}-burndown.png`);
 };
 
-const sendSlackMessage = async () => {
+const sendSlackMessage = async (filename) => {
   const web = new WebClient(core.getInput("SLACK_TOKEN"));
   // The current date
   const currentTime = new Date().toTimeString();
   try {
     // Use the `chat.postMessage` method to send a message from this app
     await web.chat.postMessage({
-      channel: 'C01TM4WSVH6',
-      text: `The current time is ${currentTime}`,
+      channel: 'C0234HEGCT0',
+      text: `每日燃盡圖[Beta]\n
+https://raw.githubusercontent.com/ezlukeyuan/notion-burndown/master/out/${filename}-burndown.png`,
     });
     log.info('Message posted!');
   } catch (error) {
@@ -508,13 +509,13 @@ const run = async () => {
   log.info(JSON.stringify({ labels, data, idealBurndown }));
 //   let mytitle = "燃盡圖|Demo日期:" + demo +"|目標:" + goal ;
   const chart = generateChart(data, idealBurndown, labels, demo , goal);
-
-  await writeChartToFile(chart, "./out", `sprint${sprint}-${Date.now()}`);
+  let mainfilename = `sprint${sprint}-${mainfilename}`;
+  await writeChartToFile(chart, "./out", mainfilename);
   await writeChartToFile(chart, "./out", `sprint${sprint}-latest`);
   log.info(
     JSON.stringify({ message: "Generated burndown chart", sprint, data })
   );
-  await sendSlackMessage();
+  await sendSlackMessage(mainfilename);
 
 };
 
