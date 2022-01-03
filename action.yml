@@ -29,6 +29,9 @@ inputs:
     description: "True if weekends should be included in the chart, false otherwise."
     required: false
     default: "true"
+  SLACK_TOKEN:
+    description: "slack token"
+    required: false
 runs:
   using: "node12"
   main: "index.js"
