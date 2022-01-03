@@ -432,7 +432,7 @@ const writeChartToFile = async (chart, dir, filenamePrefix) => {
 };
 
 const sendSlackMessage = async () => {
-  const web = new WebClient(process.env.SLACK_TOKEN);
+  const web = new WebClient("xoxb-1483130262021-2907703155361-E1vesnHCb6Ityqh06lDhItye");
   log.info('WebClient:',WebClient);
   log.info('SLACK_TOKEN:',process.env.SLACK_TOKEN);
   // The current date
@@ -440,7 +440,7 @@ const sendSlackMessage = async () => {
   try {
     // Use the `chat.postMessage` method to send a message from this app
     await web.chat.postMessage({
-      channel: 'C0234HEGCT0',
+      channel: 'C01TM4WSVH6',
       text: `The current time is ${currentTime}`,
     });
     log.info('Message posted!');
