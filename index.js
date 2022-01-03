@@ -76,7 +76,7 @@ const getLatestSprintSummary = async (
     start: moment(Start.date.start),
     end: moment(End.date.start),
     demo: moment(DemoDate.date.start).startOf("day").format("YYYY-MM-DD"),
-    goal: Goal.rich_text[0].plain_text.split('\n'),
+    goal: Goal.rich_text[0].plain_text,
   };
 };
 
