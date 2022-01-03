@@ -26820,8 +26820,7 @@ const sendSlackMessage = async (filename) => {
     // Use the `chat.postMessage` method to send a message from this app
     await web.chat.postMessage({
       channel: 'C0234HEGCT0',
-      text: `每日燃盡圖[Beta]\n
-https://raw.githubusercontent.com/ezlukeyuan/notion-burndown/master/out/${filename}-burndown.png`,
+      text: `每日燃盡圖\nhttps://raw.githubusercontent.com/ezlukeyuan/notion-burndown/master/out/${filename}-burndown.png`,
     });
     log.info('Message posted!');
   } catch (error) {
