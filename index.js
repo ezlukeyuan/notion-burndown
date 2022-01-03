@@ -435,11 +435,14 @@ const sendSlackMessage = async (filename) => {
   const web = new WebClient(core.getInput("SLACK_TOKEN"));
   // The current date
   const currentTime = new Date().toTimeString();
+  let image_url = `https://raw.githubusercontent.com/ezlukeyuan/notion-burndown/master/out/${filename}-burndown.png`;
+  let attachments = [{"title": "burndown", "image_url": image_url}]
   try {
     // Use the `chat.postMessage` method to send a message from this app
     await web.chat.postMessage({
       channel: 'C0234HEGCT0',
-      text: `每日燃盡圖\nhttps://raw.githubusercontent.com/ezlukeyuan/notion-burndown/master/out/${filename}-burndown.png`,
+      text: `每日燃盡圖\n`,
+      attachments:attachments
     });
     log.info('Message posted!');
   } catch (error) {
