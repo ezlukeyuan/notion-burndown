@@ -26817,8 +26817,8 @@ const sendSlackMessage = async (filename) => {
   // The current date
   const currentTime = new Date().toTimeString();
   let image_url = `https://raw.githubusercontent.com/ezlukeyuan/notion-burndown/master/out/${filename}-burndown.png`;
-  let message =
-      JSON.stringify([{"type":"image","title":{"type":"plain_text","text":"burndown","emoji":true},"image_url":image_url,"alt_text":"marg"}]);
+  let message = JSON.stringify([{"type":"image","title":{"type":"plain_text","text":"burndown","emoji":true},"image_url":image_url,"alt_text":"marg"}]);
+  log.info("message:",message);
   try {
     // Use the `chat.postMessage` method to send a message from this app
     await web.chat.postMessage({
@@ -26899,7 +26899,7 @@ const run = async () => {
   log.info(
     JSON.stringify({ message: "Generated burndown chart", sprint, data })
   );
-  await sendSlackMessage(mainfilename);
+  await sendSlackMessage(`sprint${sprint}-latest`);
 
 };
 
