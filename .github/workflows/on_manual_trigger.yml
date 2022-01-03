@@ -22,6 +22,10 @@ jobs:
           NOTION_PROPERTY_ESTIMATE: StoryPoint
           NOTION_PROPERTY_PATTERN_STATUS_EXCLUDE: Completed
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+      - name: test
+        run: |
+          echo ${#SLACK_TOKEN}
+          echo ${#NOTION_PROPERTY_PATTERN_STATUS_EXCLUDE}
       - name: Commit burndown chart
         run: |
           git config --local user.email "luke.yuan@eztable.com"
