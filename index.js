@@ -508,7 +508,7 @@ const run = async () => {
   log.info(JSON.stringify({ labels, data, idealBurndown }));
 //   let mytitle = "燃盡圖|Demo日期:" + demo +"|目標:" + goal ;
   const chart = generateChart(data, idealBurndown, labels, demo , goal);
-  const mainfilename = `sprint${sprint}-${mainfilename}`;
+  let mainfilename = `sprint${sprint}-${Date.now()}`;
   await writeChartToFile(chart, "./out", mainfilename);
   await writeChartToFile(chart, "./out", `sprint${sprint}-latest`);
   log.info(
