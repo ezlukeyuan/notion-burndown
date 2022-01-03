@@ -1,5 +1,5 @@
 const { Client } = require("@notionhq/client");
-const { WebClient } = require('@slack/web-api');
+const { WebClient } = require("@slack/web-api");
 const moment = require("moment");
 const ChartJSImage = require("chart.js-image");
 const log = require("loglevel");
