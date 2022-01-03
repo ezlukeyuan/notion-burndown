@@ -5,7 +5,7 @@
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"@slack/web-api","version":"6.5.1","description":"Official library for using the Slack Platform\'s Web API","author":"Slack Technologies, LLC","license":"MIT","keywords":["slack","web-api","bot","client","http","api","proxy","rate-limiting","pagination"],"main":"dist/index.js","types":"./dist/index.d.ts","files":["dist/**/*"],"engines":{"node":">= 12.13.0","npm":">= 6.12.0"},"repository":"slackapi/node-slack-sdk","homepage":"https://slack.dev/node-slack-sdk/web-api","publishConfig":{"access":"public"},"bugs":{"url":"https://github.com/slackapi/node-slack-sdk/issues"},"scripts":{"prepare":"npm run build","build":"npm run build:clean && tsc","build:clean":"shx rm -rf ./dist ./coverage ./.nyc_output","lint":"eslint --ext .ts src","test":"npm run lint && npm run build && npm run test:mocha && npm run test:types","test:mocha":"nyc mocha --config .mocharc.json src/*.spec.js","test:types":"tsd","coverage":"codecov -F webapi --root=$PWD","ref-docs:model":"api-extractor run","watch":"npx nodemon --watch \'src\' --ext \'ts\' --exec npm run build","build:deno":"esbuild --bundle --define:process.cwd=String --define:process.version=\'\\"v16.0.0\\"\' --define:Buffer=dummy_buffer --inject:./deno-shims/buffer-shim.js --target=esnext --format=esm --outfile=./mod.js src/index.ts"},"dependencies":{"@slack/logger":"^3.0.0","@slack/types":"^2.0.0","@types/is-stream":"^1.1.0","@types/node":">=12.0.0","axios":"^0.24.0","eventemitter3":"^3.1.0","form-data":"^2.5.0","is-stream":"^1.1.0","p-queue":"^6.6.1","p-retry":"^4.0.0","is-electron":"2.2.0"},"devDependencies":{"@aoberoi/capture-console":"^1.1.0","@microsoft/api-extractor":"^7.3.4","@types/chai":"^4.1.7","@types/mocha":"^5.2.6","@typescript-eslint/eslint-plugin":"^4.4.1","@typescript-eslint/parser":"^4.4.0","busboy":"^0.3.0","chai":"^4.2.0","codecov":"^3.2.0","esbuild":"^0.13.15","eslint":"^7.32.0","eslint-config-airbnb-base":"^14.2.1","eslint-config-airbnb-typescript":"^12.3.1","eslint-plugin-import":"^2.22.1","eslint-plugin-jsdoc":"^30.6.1","eslint-plugin-node":"^11.1.0","mocha":"^9.1.0","nock":"^13.1.0","nyc":"^14.1.1","shelljs":"^0.8.3","shx":"^0.3.2","sinon":"^7.2.7","source-map-support":"^0.5.10","ts-node":"^9.0.0","tsd":"^0.13.1","typescript":"^4.1"},"tsd":{"directory":"test/types"}}');
+module.exports = JSON.parse('{"name":"@slack/web-api","version":"5.15.0","description":"Official library for using the Slack Platform\'s Web API","author":"Slack Technologies, Inc.","license":"MIT","keywords":["slack","web-api","bot","client","http","api","proxy","rate-limiting","pagination"],"main":"dist/index.js","types":"./dist/index.d.ts","files":["dist/**/*"],"engines":{"node":">= 8.9.0","npm":">= 5.5.1"},"repository":"slackapi/node-slack-sdk","homepage":"https://slack.dev/node-slack-sdk/web-api","publishConfig":{"access":"public"},"bugs":{"url":"https://github.com/slackapi/node-slack-sdk/issues"},"scripts":{"prepare":"npm run build","build":"npm run build:clean && tsc","build:clean":"shx rm -rf ./dist ./coverage ./.nyc_output","lint":"tslint --project .","test":"npm run build && npm run test:mocha && npm run test:types","test:mocha":"nyc mocha --config .mocharc.json src/*.spec.js","test:types":"tsd","coverage":"codecov -F webapi --root=$PWD","ref-docs:model":"api-extractor run","watch":"npx nodemon --watch \'src\' --ext \'ts\' --exec npm run build"},"dependencies":{"@slack/logger":">=1.0.0 <3.0.0","@slack/types":"^1.7.0","@types/is-stream":"^1.1.0","@types/node":">=8.9.0","axios":"^0.21.1","eventemitter3":"^3.1.0","form-data":"^2.5.0","is-stream":"^1.1.0","p-queue":"^6.6.1","p-retry":"^4.0.0"},"devDependencies":{"@aoberoi/capture-console":"^1.1.0","@microsoft/api-extractor":"^7.3.4","@types/chai":"^4.1.7","@types/mocha":"^5.2.6","busboy":"^0.3.0","chai":"^4.2.0","codecov":"^3.2.0","mocha":"^6.0.2","nock":"^10.0.6","nyc":"^14.1.1","shelljs":"^0.8.3","shx":"^0.3.2","sinon":"^7.2.7","source-map-support":"^0.5.10","ts-node":"^8.0.3","tsd":"^0.13.1","tslint":"^5.13.1","tslint-config-airbnb":"^5.11.1","typescript":"^3.3.3333"},"tsd":{"directory":"test/types"}}');
 
 /***/ }),
 
@@ -1572,7 +1572,6 @@ module.exports.assert = exports.assert;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ConsoleLogger = exports.LogLevel = void 0;
 /**
  * Severity levels for log entries
  */
@@ -1645,7 +1644,6 @@ class ConsoleLogger {
         return ConsoleLogger.severity[a] >= ConsoleLogger.severity[b];
     }
 }
-exports.ConsoleLogger = ConsoleLogger;
 /** Map of labels for each log level */
 ConsoleLogger.labels = (() => {
     const entries = Object.entries(LogLevel);
@@ -1661,6 +1659,7 @@ ConsoleLogger.severity = {
     [LogLevel.INFO]: 200,
     [LogLevel.DEBUG]: 100,
 };
+exports.ConsoleLogger = ConsoleLogger;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -1680,6 +1679,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 "use strict";
 
+/// <reference lib="esnext.asynciterable" />
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -1695,7 +1695,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -1722,33 +1722,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.WebClient = exports.WebClientEvent = void 0;
+exports.WebClientEvent = exports.WebClient = void 0;
+// polyfill for async iterable. see: https://stackoverflow.com/a/43694282/305340
+// can be removed once node v10 is the minimum target (node v8 and v9 require --harmony_async_iteration flag)
+if (Symbol['asyncIterator'] === undefined) {
+    (Symbol['asyncIterator']) = Symbol.for('asyncIterator');
+}
 const querystring_1 = __nccwpck_require__(1191);
 const path_1 = __nccwpck_require__(5622);
 const is_stream_1 = __importDefault(__nccwpck_require__(1554));
-const p_queue_1 = __importDefault(__nccwpck_require__(8983));
+const p_queue_1 = __importDefault(__nccwpck_require__(8983)); // tslint:disable-line:import-name
 const p_retry_1 = __importStar(__nccwpck_require__(2548));
 const axios_1 = __importDefault(__nccwpck_require__(6545));
-const form_data_1 = __importDefault(__nccwpck_require__(4334));
-const is_electron_1 = __importDefault(__nccwpck_require__(7439));
+const form_data_1 = __importDefault(__nccwpck_require__(4334)); // tslint:disable-line:import-name
 const methods_1 = __nccwpck_require__(1571);
 const instrument_1 = __nccwpck_require__(7763);
 const errors_1 = __nccwpck_require__(9781);
 const logger_1 = __nccwpck_require__(1336);
-const retry_policies_1 = __nccwpck_require__(2156);
-const helpers_1 = __importDefault(__nccwpck_require__(2500));
-/*
- * Helpers
- */
-const defaultFilename = 'Untitled';
-const defaultPageSize = 200;
-const noopPageReducer = () => undefined;
-var WebClientEvent;
-(function (WebClientEvent) {
-    // TODO: safe to rename this to conform to PascalCase enum type naming convention?
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    WebClientEvent["RATE_LIMITED"] = "rate_limited";
-})(WebClientEvent = exports.WebClientEvent || (exports.WebClientEvent = {}));
+const retry_policies_1 = __importDefault(__nccwpck_require__(2156));
+const helpers_1 = __nccwpck_require__(2500);
 /**
  * A client for Slack's Web API
  *
@@ -1759,7 +1751,7 @@ class WebClient extends methods_1.Methods {
     /**
      * @param token - An API token to authenticate/authorize with Slack (usually start with `xoxp`, `xoxb`)
      */
-    constructor(token, { slackApiUrl = 'https://slack.com/api/', logger = undefined, logLevel = undefined, maxRequestConcurrency = 3, retryConfig = retry_policies_1.tenRetriesInAboutThirtyMinutes, agent = undefined, tls = undefined, timeout = 0, rejectRateLimitedCalls = false, headers = {}, teamId = undefined, } = {}) {
+    constructor(token, { slackApiUrl = 'https://slack.com/api/', logger = undefined, logLevel = logger_1.LogLevel.INFO, maxRequestConcurrency = 3, retryConfig = retry_policies_1.default.tenRetriesInAboutThirtyMinutes, agent = undefined, tls = undefined, rejectRateLimitedCalls = false, headers = {}, teamId = undefined, } = {}) {
         super();
         this.token = token;
         this.slackApiUrl = slackApiUrl;
@@ -1777,15 +1769,13 @@ class WebClient extends methods_1.Methods {
             }
         }
         else {
-            this.logger = (0, logger_1.getLogger)(WebClient.loggerName, logLevel !== null && logLevel !== void 0 ? logLevel : logger_1.LogLevel.INFO, logger);
+            this.logger = logger_1.getLogger(WebClient.loggerName, logLevel, logger);
         }
-        // eslint-disable-next-line no-param-reassign
-        if (this.token && !headers.Authorization)
-            headers.Authorization = `Bearer ${this.token}`;
         this.axios = axios_1.default.create({
-            timeout,
             baseURL: slackApiUrl,
-            headers: (0, is_electron_1.default)() ? headers : Object.assign({ 'User-Agent': (0, instrument_1.getUserAgent)() }, headers),
+            headers: Object.assign({
+                'User-Agent': instrument_1.getUserAgent(),
+            }, headers),
             httpAgent: agent,
             httpsAgent: agent,
             transformRequest: [this.serializeApiCallOptions.bind(this)],
@@ -1807,18 +1797,16 @@ class WebClient extends methods_1.Methods {
      * @param method - the Web API method to call {@link https://api.slack.com/methods}
      * @param options - options
      */
-    async apiCall(method, options = {}) {
+    async apiCall(method, options) {
         this.logger.debug(`apiCall('${method}') start`);
         warnDeprecations(method, this.logger);
-        warnIfFallbackIsMissing(method, this.logger, options);
-        warnIfThreadTsIsNotString(method, this.logger, options);
         if (typeof options === 'string' || typeof options === 'number' || typeof options === 'boolean') {
             throw new TypeError(`Expected an options argument but instead received a ${typeof options}`);
         }
-        const headers = {};
-        if (options.token)
-            headers.Authorization = `Bearer ${options.token}`;
-        const response = await this.makeRequest(method, Object.assign({ team_id: this.teamId }, options), headers);
+        const response = await this.makeRequest(method, Object.assign({
+            token: this.token,
+            team_id: this.teamId,
+        }, options));
         const result = this.buildResult(response);
         // log warnings in response metadata
         if (result.response_metadata !== undefined && result.response_metadata.warnings !== undefined) {
@@ -1845,7 +1833,7 @@ class WebClient extends methods_1.Methods {
             });
         }
         if (!result.ok) {
-            throw (0, errors_1.platformErrorFromResult)(result);
+            throw errors_1.platformErrorFromResult(result);
         }
         return result;
     }
@@ -1855,8 +1843,7 @@ class WebClient extends methods_1.Methods {
         }
         const pageSize = (() => {
             if (options !== undefined && typeof options.limit === 'number') {
-                const { limit } = options;
-                // eslint-disable-next-line no-param-reassign
+                const limit = options.limit;
                 delete options.limit;
                 return limit;
             }
@@ -1865,7 +1852,7 @@ class WebClient extends methods_1.Methods {
         function generatePages() {
             return __asyncGenerator(this, arguments, function* generatePages_1() {
                 // when result is undefined, that signals that the first of potentially many calls has not yet been made
-                let result;
+                let result = undefined;
                 // paginationOptions stores pagination options not already stored in the options argument
                 let paginationOptions = {
                     limit: pageSize,
@@ -1875,7 +1862,6 @@ class WebClient extends methods_1.Methods {
                 }
                 // NOTE: test for the situation where you're resuming a pagination using and existing cursor
                 while (result === undefined || paginationOptions !== undefined) {
-                    // eslint-disable-next-line no-await-in-loop
                     result = yield __await(this.apiCall(method, Object.assign(options !== undefined ? options : {}, paginationOptions)));
                     yield yield __await(result);
                     paginationOptions = paginationOptionsForNextPage(result, pageSize);
@@ -1905,7 +1891,6 @@ class WebClient extends methods_1.Methods {
             }
             try {
                 // Continue iteration
-                // eslint-disable-next-line no-restricted-syntax
                 for (var pageIterator_1 = __asyncValues(pageIterator), pageIterator_1_1; pageIterator_1_1 = await pageIterator_1.next(), !pageIterator_1_1.done;) {
                     const page = pageIterator_1_1.value;
                     accumulator = pageReducer(accumulator, page, index);
@@ -1928,20 +1913,21 @@ class WebClient extends methods_1.Methods {
     /**
      * Low-level function to make a single API request. handles queuing, retries, and http-level errors
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async makeRequest(url, body, headers = {}) {
         // TODO: better input types - remove any
         const task = () => this.requestQueue.add(async () => {
             this.logger.debug('will perform http request');
             try {
-                const response = await this.axios.post(url, body, Object.assign({ headers }, this.tlsConfig));
+                const response = await this.axios.post(url, body, Object.assign({
+                    headers,
+                }, this.tlsConfig));
                 this.logger.debug('http response received');
                 if (response.status === 429) {
                     const retrySec = parseRetryHeaders(response);
                     if (retrySec !== undefined) {
                         this.emit(WebClientEvent.RATE_LIMITED, retrySec);
                         if (this.rejectRateLimitedCalls) {
-                            throw new p_retry_1.AbortError((0, errors_1.rateLimitedErrorWithDelay)(retrySec));
+                            throw new p_retry_1.AbortError(errors_1.rateLimitedErrorWithDelay(retrySec));
                         }
                         this.logger.info(`API Call failed due to rate limiting. Will retry in ${retrySec} seconds.`);
                         // pause the request queue and then delay the rejection by the amount of time in the retry header
@@ -1952,35 +1938,31 @@ class WebClient extends methods_1.Methods {
                         // solution would be to subtract the time from only the timeout of this next attempt of the
                         // RetryOperation. this would result in the staying paused for the entire duration specified in the
                         // header, yet this operation not having to pay the timeout cost in addition to that.
-                        await (0, helpers_1.default)(retrySec * 1000);
+                        await helpers_1.delay(retrySec * 1000);
                         // resume the request queue and throw a non-abort error to signal a retry
                         this.requestQueue.start();
-                        // TODO: We may want to have more detailed info such as team_id, params except tokens, and so on.
-                        throw Error(`A rate limit was exceeded (url: ${url}, retry-after: ${retrySec})`);
+                        throw Error('A rate limit was exceeded.');
                     }
                     else {
                         // TODO: turn this into some CodedError
-                        throw new p_retry_1.AbortError(new Error(`Retry header did not contain a valid timeout (url: ${url})`));
+                        throw new p_retry_1.AbortError(new Error('Retry header did not contain a valid timeout.'));
                     }
                 }
                 // Slack's Web API doesn't use meaningful status codes besides 429 and 200
                 if (response.status !== 200) {
-                    throw (0, errors_1.httpErrorFromResponse)(response);
+                    throw errors_1.httpErrorFromResponse(response);
                 }
                 return response;
             }
             catch (error) {
-                // To make this compatible with tsd, casting here instead of `catch (error: any)`
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const e = error;
-                this.logger.warn('http request failed', e.message);
-                if (e.request) {
-                    throw (0, errors_1.requestErrorWithOriginal)(e);
+                this.logger.warn('http request failed', error.message);
+                if (error.request) {
+                    throw errors_1.requestErrorWithOriginal(error);
                 }
                 throw error;
             }
         });
-        return (0, p_retry_1.default)(task, this.retryConfig);
+        return p_retry_1.default(task, this.retryConfig);
     }
     /**
      * Transforms options (a simple key-value object) into an acceptable value for a body. This can be either
@@ -1991,18 +1973,17 @@ class WebClient extends methods_1.Methods {
      * @param options - arguments for the Web API method
      * @param headers - a mutable object representing the HTTP headers for the outgoing request
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     serializeApiCallOptions(options, headers) {
         // The following operation both flattens complex objects into a JSON-encoded strings and searches the values for
         // binary content
         let containsBinaryData = false;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const flattened = Object.entries(options).map(([key, value]) => {
+        const flattened = Object.entries(options)
+            .map(([key, value]) => {
             if (value === undefined || value === null) {
                 return [];
             }
             let serializedValue = value;
-            if (Buffer.isBuffer(value) || (0, is_stream_1.default)(value)) {
+            if (Buffer.isBuffer(value) || is_stream_1.default(value)) {
                 containsBinaryData = true;
             }
             else if (typeof value !== 'string' && typeof value !== 'number' && typeof value !== 'boolean') {
@@ -2015,45 +1996,42 @@ class WebClient extends methods_1.Methods {
         // A body with binary content should be serialized as multipart/form-data
         if (containsBinaryData) {
             this.logger.debug('request arguments contain binary data');
-            const form = flattened.reduce((frm, [key, value]) => {
-                if (Buffer.isBuffer(value) || (0, is_stream_1.default)(value)) {
-                    const opts = {};
-                    opts.filename = (() => {
+            const form = flattened.reduce((form, [key, value]) => {
+                if (Buffer.isBuffer(value) || is_stream_1.default(value)) {
+                    const options = {};
+                    options.filename = (() => {
                         // attempt to find filename from `value`. adapted from:
+                        // tslint:disable-next-line:max-line-length
                         // https://github.com/form-data/form-data/blob/028c21e0f93c5fefa46a7bbf1ba753e4f627ab7a/lib/form_data.js#L227-L230
                         // formidable and the browser add a name property
                         // fs- and request- streams have path property
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         const streamOrBuffer = value;
                         if (typeof streamOrBuffer.name === 'string') {
-                            return (0, path_1.basename)(streamOrBuffer.name);
+                            return path_1.basename(streamOrBuffer.name);
                         }
                         if (typeof streamOrBuffer.path === 'string') {
-                            return (0, path_1.basename)(streamOrBuffer.path);
+                            return path_1.basename(streamOrBuffer.path);
                         }
                         return defaultFilename;
                     })();
-                    frm.append(key, value, opts);
+                    form.append(key, value, options);
                 }
                 else if (key !== undefined && value !== undefined) {
-                    frm.append(key, value);
+                    form.append(key, value);
                 }
-                return frm;
+                return form;
             }, new form_data_1.default());
             // Copying FormData-generated headers into headers param
             // not reassigning to headers param since it is passed by reference and behaves as an inout param
-            Object.entries(form.getHeaders()).forEach(([header, value]) => {
-                // eslint-disable-next-line no-param-reassign
+            for (const [header, value] of Object.entries(form.getHeaders())) {
                 headers[header] = value;
-            });
+            }
             return form;
         }
         // Otherwise, a simple key-value object is returned
-        // eslint-disable-next-line no-param-reassign
         headers['Content-Type'] = 'application/x-www-form-urlencoded';
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const initialValue = {};
-        return (0, querystring_1.stringify)(flattened.reduce((accumulator, [key, value]) => {
+        return querystring_1.stringify(flattened.reduce((accumulator, [key, value]) => {
             if (key !== undefined && value !== undefined) {
                 accumulator[key] = value;
             }
@@ -2061,23 +2039,12 @@ class WebClient extends methods_1.Methods {
         }, initialValue));
     }
     /**
-     * Processes an HTTP response into a WebAPICallResult by performing JSON parsing on the body and merging relevant
+     * Processes an HTTP response into a WebAPICallResult by performing JSON parsing on the body and merging relevent
      * HTTP headers into the object.
      * @param response - an http response
      */
-    // eslint-disable-next-line class-methods-use-this
     buildResult(response) {
-        let { data } = response;
-        if (typeof data === 'string') {
-            // response.data can be a string, not an object for some reason
-            try {
-                data = JSON.parse(data);
-            }
-            catch (_) {
-                // failed to parse the string value as JSON data
-                data = { ok: false, error: data };
-            }
-        }
+        const data = response.data;
         if (data.response_metadata === undefined) {
             data.response_metadata = {};
         }
@@ -2086,7 +2053,8 @@ class WebClient extends methods_1.Methods {
             data.response_metadata.scopes = response.headers['x-oauth-scopes'].trim().split(/\s*,\s*/);
         }
         if (response.headers['x-accepted-oauth-scopes'] !== undefined) {
-            data.response_metadata.acceptedScopes = response.headers['x-accepted-oauth-scopes'].trim().split(/\s*,\s*/);
+            data.response_metadata.acceptedScopes =
+                response.headers['x-accepted-oauth-scopes'].trim().split(/\s*,\s*/);
         }
         // add retry metadata from headers
         const retrySec = parseRetryHeaders(response);
@@ -2102,6 +2070,16 @@ exports.WebClient = WebClient;
  */
 WebClient.loggerName = 'WebClient';
 exports.default = WebClient;
+var WebClientEvent;
+(function (WebClientEvent) {
+    WebClientEvent["RATE_LIMITED"] = "rate_limited";
+})(WebClientEvent = exports.WebClientEvent || (exports.WebClientEvent = {}));
+/*
+ * Helpers
+ */
+const defaultFilename = 'Untitled';
+const defaultPageSize = 200;
+const noopPageReducer = () => undefined;
 /**
  * Determines an appropriate set of cursor pagination options for the next request to a paginated API method.
  * @param previousResult - the result of the last request, where the next cursor might be found.
@@ -2117,7 +2095,7 @@ function paginationOptionsForNextPage(previousResult, pageSize) {
             cursor: previousResult.response_metadata.next_cursor,
         };
     }
-    return undefined;
+    return;
 }
 /**
  * Extract the amount of time (in seconds) the platform has recommended this client wait before sending another request
@@ -2153,44 +2131,6 @@ function warnDeprecations(method, logger) {
     }
     else if (isDeprecated) {
         logger.warn(`${method} is deprecated. Please check on https://api.slack.com/methods for an alternative.`);
-    }
-}
-/**
- * Log a warning when using chat.postMessage without text argument or attachments with fallback argument
- * @param method api method being called
- * @param logger instance of we clients logger
- * @param options arguments for the Web API method
- */
-function warnIfFallbackIsMissing(method, logger, options) {
-    const targetMethods = ['chat.postEphemeral', 'chat.postMessage', 'chat.scheduleMessage', 'chat.update'];
-    const isTargetMethod = targetMethods.includes(method);
-    const missingAttachmentFallbackDetected = (args) => Array.isArray(args.attachments) &&
-        args.attachments.some((attachment) => !attachment.fallback || attachment.fallback.trim() === 0);
-    const isEmptyText = (args) => args.text === undefined || args.text === null || args.text === '';
-    const buildWarningMessage = (missing) => `The \`${missing}\` argument is missing in the request payload for a ${method} call - ` +
-        `It's a best practice to always provide a \`${missing}\` argument when posting a message. ` +
-        `The \`${missing}\` is used in places where the content cannot be rendered such as: ` +
-        'system push notifications, assistive technology such as screen readers, etc.';
-    if (isTargetMethod && typeof options === 'object' && isEmptyText(options)) {
-        if (missingAttachmentFallbackDetected(options)) {
-            logger.warn(buildWarningMessage('fallback'));
-        }
-        else {
-            logger.warn(buildWarningMessage('text'));
-        }
-    }
-}
-/**
- * Log a warning when thread_ts is not a string
- * @param method api method being called
- * @param logger instance of web clients logger
- * @param options arguments for the Web API method
- */
-function warnIfThreadTsIsNotString(method, logger, options) {
-    const targetMethods = ['chat.postEphemeral', 'chat.postMessage', 'chat.scheduleMessage', 'files.upload'];
-    const isTargetMethod = targetMethods.includes(method);
-    if (isTargetMethod && (options === null || options === void 0 ? void 0 : options.thread_ts) !== undefined && typeof (options === null || options === void 0 ? void 0 : options.thread_ts) !== 'string') {
-        logger.warn(`The given thread_ts value in the request payload for a ${method} call is a float value. We highly recommend using a string value instead.`);
     }
 }
 //# sourceMappingURL=WebClient.js.map
@@ -2276,17 +2216,18 @@ exports.rateLimitedErrorWithDelay = rateLimitedErrorWithDelay;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.delay = void 0;
 /**
  * Build a Promise that will resolve after the specified number of milliseconds.
  * @param ms milliseconds to wait
  * @param value value for eventual resolution
  */
-function delay(ms) {
+function delay(ms, value) {
     return new Promise((resolve) => {
-        setTimeout(() => resolve(), ms);
+        setTimeout(() => resolve(value), ms);
     });
 }
-exports.default = delay;
+exports.delay = delay;
 //# sourceMappingURL=helpers.js.map
 
 /***/ }),
@@ -2305,13 +2246,9 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
     o[k2] = m[k];
 }));
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.addAppMetadata = exports.retryPolicies = exports.ErrorCode = exports.LogLevel = exports.WebClientEvent = exports.WebClient = void 0;
 var WebClient_1 = __nccwpck_require__(1424);
 Object.defineProperty(exports, "WebClient", ({ enumerable: true, get: function () { return WebClient_1.WebClient; } }));
 Object.defineProperty(exports, "WebClientEvent", ({ enumerable: true, get: function () { return WebClient_1.WebClientEvent; } }));
@@ -2320,11 +2257,10 @@ Object.defineProperty(exports, "LogLevel", ({ enumerable: true, get: function ()
 var errors_1 = __nccwpck_require__(9781);
 Object.defineProperty(exports, "ErrorCode", ({ enumerable: true, get: function () { return errors_1.ErrorCode; } }));
 var retry_policies_1 = __nccwpck_require__(2156);
-Object.defineProperty(exports, "retryPolicies", ({ enumerable: true, get: function () { return __importDefault(retry_policies_1).default; } }));
+Object.defineProperty(exports, "retryPolicies", ({ enumerable: true, get: function () { return retry_policies_1.default; } }));
 var instrument_1 = __nccwpck_require__(7763);
 Object.defineProperty(exports, "addAppMetadata", ({ enumerable: true, get: function () { return instrument_1.addAppMetadata; } }));
 __exportStar(__nccwpck_require__(1571), exports);
-__exportStar(__nccwpck_require__(677), exports);
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -2349,15 +2285,14 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getUserAgent = exports.addAppMetadata = void 0;
 const os = __importStar(__nccwpck_require__(2087));
-// eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-commonjs
-const packageJson = __nccwpck_require__(9557);
+const packageJson = __nccwpck_require__(9557); // tslint:disable-line:no-require-imports no-var-requires
 /**
  * Replaces occurrences of '/' with ':' in a string, since '/' is meaningful inside User-Agent strings as a separator.
  */
@@ -2396,7 +2331,7 @@ exports.getUserAgent = getUserAgent;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getLogger = exports.LogLevel = void 0;
+exports.getLogger = void 0;
 const logger_1 = __nccwpck_require__(2704);
 var logger_2 = __nccwpck_require__(2704);
 Object.defineProperty(exports, "LogLevel", ({ enumerable: true, get: function () { return logger_2.LogLevel; } }));
@@ -2439,12 +2374,12 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
     o[k2] = m[k];
 }));
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.cursorPaginationEnabledMethods = exports.Methods = void 0;
-const eventemitter3_1 = __nccwpck_require__(1848);
 const WebClient_1 = __nccwpck_require__(1424);
+const eventemitter3_1 = __nccwpck_require__(1848);
 // NOTE: could create a named type alias like data types like `SlackUserID: string`
 /**
  * Binds a certain `method` and its arguments and result types to the `apiCall` method in `WebClient`.
@@ -2468,27 +2403,17 @@ class Methods extends eventemitter3_1.EventEmitter {
     constructor() {
         super();
         this.admin = {
-            // TODO: admin.analytics.getFile
             apps: {
                 approve: bindApiCall(this, 'admin.apps.approve'),
                 approved: {
                     list: bindApiCall(this, 'admin.apps.approved.list'),
                 },
-                clearResolution: bindApiCall(this, 'admin.apps.clearResolution'),
                 requests: {
                     list: bindApiCall(this, 'admin.apps.requests.list'),
                 },
                 restrict: bindApiCall(this, 'admin.apps.restrict'),
                 restricted: {
                     list: bindApiCall(this, 'admin.apps.restricted.list'),
-                },
-                uninstall: bindApiCall(this, 'admin.apps.uninstall'),
-            },
-            auth: {
-                policy: {
-                    assignEntities: bindApiCall(this, 'admin.auth.policy.assignEntities'),
-                    getEntities: bindApiCall(this, 'admin.auth.policy.getEntities'),
-                    removeEntities: bindApiCall(this, 'admin.auth.policy.removeEntities'),
                 },
             },
             barriers: {
@@ -2515,9 +2440,6 @@ class Methods extends eventemitter3_1.EventEmitter {
                     listGroups: bindApiCall(this, 'admin.conversations.restrictAccess.listGroups'),
                     removeGroup: bindApiCall(this, 'admin.conversations.restrictAccess.removeGroup'),
                 },
-                getCustomRetention: bindApiCall(this, 'admin.conversations.getCustomRetention'),
-                setCustomRetention: bindApiCall(this, 'admin.conversations.setCustomRetention'),
-                removeCustomRetention: bindApiCall(this, 'admin.conversations.removeCustomRetention'),
                 search: bindApiCall(this, 'admin.conversations.search'),
                 setConversationPrefs: bindApiCall(this, 'admin.conversations.setConversationPrefs'),
                 setTeams: bindApiCall(this, 'admin.conversations.setTeams'),
@@ -2573,11 +2495,7 @@ class Methods extends eventemitter3_1.EventEmitter {
                 session: {
                     list: bindApiCall(this, 'admin.users.session.list'),
                     reset: bindApiCall(this, 'admin.users.session.reset'),
-                    resetBulk: bindApiCall(this, 'admin.users.session.resetBulk'),
                     invalidate: bindApiCall(this, 'admin.users.session.invalidate'),
-                    getSettings: bindApiCall(this, 'admin.users.session.getSettings'),
-                    setSettings: bindApiCall(this, 'admin.users.session.setSettings'),
-                    clearSettings: bindApiCall(this, 'admin.users.session.clearSettings'),
                 },
                 setAdmin: bindApiCall(this, 'admin.users.setAdmin'),
                 setExpiration: bindApiCall(this, 'admin.users.setExpiration'),
@@ -2589,9 +2507,6 @@ class Methods extends eventemitter3_1.EventEmitter {
             test: bindApiCall(this, 'api.test'),
         };
         this.apps = {
-            connections: {
-                open: bindApiCall(this, 'apps.connections.open'),
-            },
             event: {
                 authorizations: {
                     list: bindApiCall(this, 'apps.event.authorizations.list'),
@@ -2619,6 +2534,23 @@ class Methods extends eventemitter3_1.EventEmitter {
                 remove: bindApiCall(this, 'calls.participants.remove'),
             },
         };
+        this.channels = {
+            archive: bindApiCall(this, 'channels.archive'),
+            create: bindApiCall(this, 'channels.create'),
+            history: bindApiCall(this, 'channels.history'),
+            info: bindApiCall(this, 'channels.info'),
+            invite: bindApiCall(this, 'channels.invite'),
+            join: bindApiCall(this, 'channels.join'),
+            kick: bindApiCall(this, 'channels.kick'),
+            leave: bindApiCall(this, 'channels.leave'),
+            list: bindApiCall(this, 'channels.list'),
+            mark: bindApiCall(this, 'channels.mark'),
+            rename: bindApiCall(this, 'channels.rename'),
+            replies: bindApiCall(this, 'channels.replies'),
+            setPurpose: bindApiCall(this, 'channels.setPurpose'),
+            setTopic: bindApiCall(this, 'channels.setTopic'),
+            unarchive: bindApiCall(this, 'channels.unarchive'),
+        };
         this.chat = {
             delete: bindApiCall(this, 'chat.delete'),
             deleteScheduledMessage: bindApiCall(this, 'chat.deleteScheduledMessage'),
@@ -2634,21 +2566,16 @@ class Methods extends eventemitter3_1.EventEmitter {
             update: bindApiCall(this, 'chat.update'),
         };
         this.conversations = {
-            acceptSharedInvite: bindApiCall(this, 'conversations.acceptSharedInvite'),
-            approveSharedInvite: bindApiCall(this, 'conversations.approveSharedInvite'),
             archive: bindApiCall(this, 'conversations.archive'),
             close: bindApiCall(this, 'conversations.close'),
             create: bindApiCall(this, 'conversations.create'),
-            declineSharedInvite: bindApiCall(this, 'conversations.declineSharedInvite'),
             history: bindApiCall(this, 'conversations.history'),
             info: bindApiCall(this, 'conversations.info'),
             invite: bindApiCall(this, 'conversations.invite'),
-            inviteShared: bindApiCall(this, 'conversations.inviteShared'),
             join: bindApiCall(this, 'conversations.join'),
             kick: bindApiCall(this, 'conversations.kick'),
             leave: bindApiCall(this, 'conversations.leave'),
             list: bindApiCall(this, 'conversations.list'),
-            listConnectInvites: bindApiCall(this, 'conversations.listConnectInvites'),
             mark: bindApiCall(this, 'conversations.mark'),
             members: bindApiCall(this, 'conversations.members'),
             open: bindApiCall(this, 'conversations.open'),
@@ -2657,6 +2584,12 @@ class Methods extends eventemitter3_1.EventEmitter {
             setPurpose: bindApiCall(this, 'conversations.setPurpose'),
             setTopic: bindApiCall(this, 'conversations.setTopic'),
             unarchive: bindApiCall(this, 'conversations.unarchive'),
+        };
+        this.views = {
+            open: bindApiCall(this, 'views.open'),
+            publish: bindApiCall(this, 'views.publish'),
+            push: bindApiCall(this, 'views.push'),
+            update: bindApiCall(this, 'views.update'),
         };
         this.dialog = {
             open: bindApiCall(this, 'dialog.open'),
@@ -2690,20 +2623,47 @@ class Methods extends eventemitter3_1.EventEmitter {
                 share: bindApiCall(this, 'files.remote.share'),
             },
         };
+        this.groups = {
+            archive: bindApiCall(this, 'groups.archive'),
+            create: bindApiCall(this, 'groups.create'),
+            createChild: bindApiCall(this, 'groups.createChild'),
+            history: bindApiCall(this, 'groups.history'),
+            info: bindApiCall(this, 'groups.info'),
+            invite: bindApiCall(this, 'groups.invite'),
+            kick: bindApiCall(this, 'groups.kick'),
+            leave: bindApiCall(this, 'groups.leave'),
+            list: bindApiCall(this, 'groups.list'),
+            mark: bindApiCall(this, 'groups.mark'),
+            open: bindApiCall(this, 'groups.open'),
+            rename: bindApiCall(this, 'groups.rename'),
+            replies: bindApiCall(this, 'groups.replies'),
+            setPurpose: bindApiCall(this, 'groups.setPurpose'),
+            setTopic: bindApiCall(this, 'groups.setTopic'),
+            unarchive: bindApiCall(this, 'groups.unarchive'),
+        };
+        this.im = {
+            close: bindApiCall(this, 'im.close'),
+            history: bindApiCall(this, 'im.history'),
+            list: bindApiCall(this, 'im.list'),
+            mark: bindApiCall(this, 'im.mark'),
+            open: bindApiCall(this, 'im.open'),
+            replies: bindApiCall(this, 'im.replies'),
+        };
         this.migration = {
             exchange: bindApiCall(this, 'migration.exchange'),
+        };
+        this.mpim = {
+            close: bindApiCall(this, 'mpim.close'),
+            history: bindApiCall(this, 'mpim.history'),
+            list: bindApiCall(this, 'mpim.list'),
+            mark: bindApiCall(this, 'mpim.mark'),
+            open: bindApiCall(this, 'mpim.open'),
+            replies: bindApiCall(this, 'mpim.replies'),
         };
         this.oauth = {
             access: bindApiCall(this, 'oauth.access'),
             v2: {
                 access: bindApiCall(this, 'oauth.v2.access'),
-                exchange: bindApiCall(this, 'oauth.v2.exchange'),
-            },
-        };
-        this.openid = {
-            connect: {
-                token: bindApiCall(this, 'openid.connect.token'),
-                userInfo: bindApiCall(this, 'openid.connect.userInfo'),
             },
         };
         this.pins = {
@@ -2741,14 +2701,8 @@ class Methods extends eventemitter3_1.EventEmitter {
         this.team = {
             accessLogs: bindApiCall(this, 'team.accessLogs'),
             billableInfo: bindApiCall(this, 'team.billableInfo'),
-            billing: {
-                info: bindApiCall(this, 'team.billing.info'),
-            },
             info: bindApiCall(this, 'team.info'),
             integrationLogs: bindApiCall(this, 'team.integrationLogs'),
-            preferences: {
-                list: bindApiCall(this, 'team.preferences.list'),
-            },
             profile: {
                 get: bindApiCall(this, 'team.profile.get'),
             },
@@ -2779,70 +2733,10 @@ class Methods extends eventemitter3_1.EventEmitter {
                 set: bindApiCall(this, 'users.profile.set'),
             },
         };
-        this.views = {
-            open: bindApiCall(this, 'views.open'),
-            publish: bindApiCall(this, 'views.publish'),
-            push: bindApiCall(this, 'views.push'),
-            update: bindApiCall(this, 'views.update'),
-        };
         this.workflows = {
             stepCompleted: bindApiCall(this, 'workflows.stepCompleted'),
             stepFailed: bindApiCall(this, 'workflows.stepFailed'),
             updateStep: bindApiCall(this, 'workflows.updateStep'),
-        };
-        // ---------------------------------
-        // Deprecated methods
-        // ---------------------------------
-        this.channels = {
-            archive: bindApiCall(this, 'channels.archive'),
-            create: bindApiCall(this, 'channels.create'),
-            history: bindApiCall(this, 'channels.history'),
-            info: bindApiCall(this, 'channels.info'),
-            invite: bindApiCall(this, 'channels.invite'),
-            join: bindApiCall(this, 'channels.join'),
-            kick: bindApiCall(this, 'channels.kick'),
-            leave: bindApiCall(this, 'channels.leave'),
-            list: bindApiCall(this, 'channels.list'),
-            mark: bindApiCall(this, 'channels.mark'),
-            rename: bindApiCall(this, 'channels.rename'),
-            replies: bindApiCall(this, 'channels.replies'),
-            setPurpose: bindApiCall(this, 'channels.setPurpose'),
-            setTopic: bindApiCall(this, 'channels.setTopic'),
-            unarchive: bindApiCall(this, 'channels.unarchive'),
-        };
-        this.groups = {
-            archive: bindApiCall(this, 'groups.archive'),
-            create: bindApiCall(this, 'groups.create'),
-            createChild: bindApiCall(this, 'groups.createChild'),
-            history: bindApiCall(this, 'groups.history'),
-            info: bindApiCall(this, 'groups.info'),
-            invite: bindApiCall(this, 'groups.invite'),
-            kick: bindApiCall(this, 'groups.kick'),
-            leave: bindApiCall(this, 'groups.leave'),
-            list: bindApiCall(this, 'groups.list'),
-            mark: bindApiCall(this, 'groups.mark'),
-            open: bindApiCall(this, 'groups.open'),
-            rename: bindApiCall(this, 'groups.rename'),
-            replies: bindApiCall(this, 'groups.replies'),
-            setPurpose: bindApiCall(this, 'groups.setPurpose'),
-            setTopic: bindApiCall(this, 'groups.setTopic'),
-            unarchive: bindApiCall(this, 'groups.unarchive'),
-        };
-        this.im = {
-            close: bindApiCall(this, 'im.close'),
-            history: bindApiCall(this, 'im.history'),
-            list: bindApiCall(this, 'im.list'),
-            mark: bindApiCall(this, 'im.mark'),
-            open: bindApiCall(this, 'im.open'),
-            replies: bindApiCall(this, 'im.replies'),
-        };
-        this.mpim = {
-            close: bindApiCall(this, 'mpim.close'),
-            history: bindApiCall(this, 'mpim.history'),
-            list: bindApiCall(this, 'mpim.list'),
-            mark: bindApiCall(this, 'mpim.mark'),
-            open: bindApiCall(this, 'mpim.open'),
-            replies: bindApiCall(this, 'mpim.replies'),
         };
         // Check that the class being created extends from `WebClient` rather than this class
         if (new.target !== WebClient_1.WebClient && !(new.target.prototype instanceof WebClient_1.WebClient)) {
@@ -2858,7 +2752,6 @@ exports.cursorPaginationEnabledMethods = new Set();
 exports.cursorPaginationEnabledMethods.add('admin.apps.approved.list');
 exports.cursorPaginationEnabledMethods.add('admin.apps.requests.list');
 exports.cursorPaginationEnabledMethods.add('admin.apps.restricted.list');
-exports.cursorPaginationEnabledMethods.add('admin.auth.policy.getEntities');
 exports.cursorPaginationEnabledMethods.add('admin.barriers.list');
 exports.cursorPaginationEnabledMethods.add('admin.conversations.ekm.listOriginalConnectedChannelInfo');
 exports.cursorPaginationEnabledMethods.add('admin.conversations.getTeams');
@@ -2878,7 +2771,6 @@ exports.cursorPaginationEnabledMethods.add('channels.list');
 exports.cursorPaginationEnabledMethods.add('chat.scheduledMessages.list');
 exports.cursorPaginationEnabledMethods.add('conversations.history');
 exports.cursorPaginationEnabledMethods.add('conversations.list');
-exports.cursorPaginationEnabledMethods.add('conversations.listConnectInvites');
 exports.cursorPaginationEnabledMethods.add('conversations.members');
 exports.cursorPaginationEnabledMethods.add('conversations.replies');
 exports.cursorPaginationEnabledMethods.add('files.info');
@@ -2892,16 +2784,6 @@ exports.cursorPaginationEnabledMethods.add('users.conversations');
 exports.cursorPaginationEnabledMethods.add('users.list');
 __exportStar(__nccwpck_require__(4380), exports);
 //# sourceMappingURL=methods.js.map
-
-/***/ }),
-
-/***/ 677:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-//# sourceMappingURL=index.js.map
 
 /***/ }),
 
@@ -3544,11 +3426,9 @@ var httpFollow = __nccwpck_require__(7707).http;
 var httpsFollow = __nccwpck_require__(7707).https;
 var url = __nccwpck_require__(8835);
 var zlib = __nccwpck_require__(8761);
-var VERSION = __nccwpck_require__(4322).version;
+var pkg = __nccwpck_require__(696);
 var createError = __nccwpck_require__(5226);
 var enhanceError = __nccwpck_require__(1516);
-var defaults = __nccwpck_require__(8190);
-var Cancel = __nccwpck_require__(8875);
 
 var isHttps = /https:?/;
 
@@ -3580,43 +3460,27 @@ function setProxy(options, proxy, location) {
 /*eslint consistent-return:0*/
 module.exports = function httpAdapter(config) {
   return new Promise(function dispatchHttpRequest(resolvePromise, rejectPromise) {
-    var onCanceled;
-    function done() {
-      if (config.cancelToken) {
-        config.cancelToken.unsubscribe(onCanceled);
-      }
-
-      if (config.signal) {
-        config.signal.removeEventListener('abort', onCanceled);
-      }
-    }
     var resolve = function resolve(value) {
-      done();
       resolvePromise(value);
     };
     var reject = function reject(value) {
-      done();
       rejectPromise(value);
     };
     var data = config.data;
     var headers = config.headers;
-    var headerNames = {};
-
-    Object.keys(headers).forEach(function storeLowerName(name) {
-      headerNames[name.toLowerCase()] = name;
-    });
 
     // Set User-Agent (required by some servers)
     // See https://github.com/axios/axios/issues/69
-    if ('user-agent' in headerNames) {
+    if ('User-Agent' in headers || 'user-agent' in headers) {
       // User-Agent is specified; handle case where no UA header is desired
-      if (!headers[headerNames['user-agent']]) {
-        delete headers[headerNames['user-agent']];
+      if (!headers['User-Agent'] && !headers['user-agent']) {
+        delete headers['User-Agent'];
+        delete headers['user-agent'];
       }
       // Otherwise, use specified value
     } else {
       // Only set header if it hasn't been set in config
-      headers['User-Agent'] = 'axios/' + VERSION;
+      headers['User-Agent'] = 'axios/' + pkg.version;
     }
 
     if (data && !utils.isStream(data)) {
@@ -3634,9 +3498,7 @@ module.exports = function httpAdapter(config) {
       }
 
       // Add Content-Length header if data exists
-      if (!headerNames['content-length']) {
-        headers['Content-Length'] = data.length;
-      }
+      headers['Content-Length'] = data.length;
     }
 
     // HTTP basic authentication
@@ -3659,8 +3521,8 @@ module.exports = function httpAdapter(config) {
       auth = urlUsername + ':' + urlPassword;
     }
 
-    if (auth && headerNames.authorization) {
-      delete headers[headerNames.authorization];
+    if (auth) {
+      delete headers.Authorization;
     }
 
     var isHttpsRequest = isHttps.test(protocol);
@@ -3750,10 +3612,6 @@ module.exports = function httpAdapter(config) {
 
     if (config.maxBodyLength > -1) {
       options.maxBodyLength = config.maxBodyLength;
-    }
-
-    if (config.insecureHTTPParser) {
-      options.insecureHTTPParser = config.insecureHTTPParser;
     }
 
     // Create the request
@@ -3858,32 +3716,24 @@ module.exports = function httpAdapter(config) {
       // ClientRequest.setTimeout will be fired on the specify milliseconds, and can make sure that abort() will be fired after connect.
       req.setTimeout(timeout, function handleRequestTimeout() {
         req.abort();
-        var transitional = config.transitional || defaults.transitional;
         reject(createError(
           'timeout of ' + timeout + 'ms exceeded',
           config,
-          transitional.clarifyTimeoutError ? 'ETIMEDOUT' : 'ECONNABORTED',
+          config.transitional && config.transitional.clarifyTimeoutError ? 'ETIMEDOUT' : 'ECONNABORTED',
           req
         ));
       });
     }
 
-    if (config.cancelToken || config.signal) {
+    if (config.cancelToken) {
       // Handle cancellation
-      // eslint-disable-next-line func-names
-      onCanceled = function(cancel) {
+      config.cancelToken.promise.then(function onCanceled(cancel) {
         if (req.aborted) return;
 
         req.abort();
-        reject(!cancel || (cancel && cancel.type) ? new Cancel('canceled') : cancel);
-      };
-
-      config.cancelToken && config.cancelToken.subscribe(onCanceled);
-      if (config.signal) {
-        config.signal.aborted ? onCanceled() : config.signal.addEventListener('abort', onCanceled);
-      }
+        reject(cancel);
+      });
     }
-
 
     // Send the request
     if (utils.isStream(data)) {
@@ -3913,24 +3763,12 @@ var buildFullPath = __nccwpck_require__(1934);
 var parseHeaders = __nccwpck_require__(6455);
 var isURLSameOrigin = __nccwpck_require__(3608);
 var createError = __nccwpck_require__(5226);
-var defaults = __nccwpck_require__(8190);
-var Cancel = __nccwpck_require__(8875);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
     var requestData = config.data;
     var requestHeaders = config.headers;
     var responseType = config.responseType;
-    var onCanceled;
-    function done() {
-      if (config.cancelToken) {
-        config.cancelToken.unsubscribe(onCanceled);
-      }
-
-      if (config.signal) {
-        config.signal.removeEventListener('abort', onCanceled);
-      }
-    }
 
     if (utils.isFormData(requestData)) {
       delete requestHeaders['Content-Type']; // Let the browser set it
@@ -3968,13 +3806,7 @@ module.exports = function xhrAdapter(config) {
         request: request
       };
 
-      settle(function _resolve(value) {
-        resolve(value);
-        done();
-      }, function _reject(err) {
-        reject(err);
-        done();
-      }, response);
+      settle(resolve, reject, response);
 
       // Clean up request
       request = null;
@@ -4027,15 +3859,14 @@ module.exports = function xhrAdapter(config) {
 
     // Handle timeout
     request.ontimeout = function handleTimeout() {
-      var timeoutErrorMessage = config.timeout ? 'timeout of ' + config.timeout + 'ms exceeded' : 'timeout exceeded';
-      var transitional = config.transitional || defaults.transitional;
+      var timeoutErrorMessage = 'timeout of ' + config.timeout + 'ms exceeded';
       if (config.timeoutErrorMessage) {
         timeoutErrorMessage = config.timeoutErrorMessage;
       }
       reject(createError(
         timeoutErrorMessage,
         config,
-        transitional.clarifyTimeoutError ? 'ETIMEDOUT' : 'ECONNABORTED',
+        config.transitional && config.transitional.clarifyTimeoutError ? 'ETIMEDOUT' : 'ECONNABORTED',
         request));
 
       // Clean up request
@@ -4089,22 +3920,18 @@ module.exports = function xhrAdapter(config) {
       request.upload.addEventListener('progress', config.onUploadProgress);
     }
 
-    if (config.cancelToken || config.signal) {
+    if (config.cancelToken) {
       // Handle cancellation
-      // eslint-disable-next-line func-names
-      onCanceled = function(cancel) {
+      config.cancelToken.promise.then(function onCanceled(cancel) {
         if (!request) {
           return;
         }
-        reject(!cancel || (cancel && cancel.type) ? new Cancel('canceled') : cancel);
-        request.abort();
-        request = null;
-      };
 
-      config.cancelToken && config.cancelToken.subscribe(onCanceled);
-      if (config.signal) {
-        config.signal.aborted ? onCanceled() : config.signal.addEventListener('abort', onCanceled);
-      }
+        request.abort();
+        reject(cancel);
+        // Clean up request
+        request = null;
+      });
     }
 
     if (!requestData) {
@@ -4147,11 +3974,6 @@ function createInstance(defaultConfig) {
   // Copy context to instance
   utils.extend(instance, context);
 
-  // Factory for creating new instances
-  instance.create = function create(instanceConfig) {
-    return createInstance(mergeConfig(defaultConfig, instanceConfig));
-  };
-
   return instance;
 }
 
@@ -4161,11 +3983,15 @@ var axios = createInstance(defaults);
 // Expose Axios class to allow class inheritance
 axios.Axios = Axios;
 
+// Factory for creating new instances
+axios.create = function create(instanceConfig) {
+  return createInstance(mergeConfig(axios.defaults, instanceConfig));
+};
+
 // Expose Cancel & CancelToken
 axios.Cancel = __nccwpck_require__(8875);
 axios.CancelToken = __nccwpck_require__(1587);
 axios.isCancel = __nccwpck_require__(4057);
-axios.VERSION = __nccwpck_require__(4322).version;
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -4231,42 +4057,11 @@ function CancelToken(executor) {
   }
 
   var resolvePromise;
-
   this.promise = new Promise(function promiseExecutor(resolve) {
     resolvePromise = resolve;
   });
 
   var token = this;
-
-  // eslint-disable-next-line func-names
-  this.promise.then(function(cancel) {
-    if (!token._listeners) return;
-
-    var i;
-    var l = token._listeners.length;
-
-    for (i = 0; i < l; i++) {
-      token._listeners[i](cancel);
-    }
-    token._listeners = null;
-  });
-
-  // eslint-disable-next-line func-names
-  this.promise.then = function(onfulfilled) {
-    var _resolve;
-    // eslint-disable-next-line func-names
-    var promise = new Promise(function(resolve) {
-      token.subscribe(resolve);
-      _resolve = resolve;
-    }).then(onfulfilled);
-
-    promise.cancel = function reject() {
-      token.unsubscribe(_resolve);
-    };
-
-    return promise;
-  };
-
   executor(function cancel(message) {
     if (token.reason) {
       // Cancellation has already been requested
@@ -4284,37 +4079,6 @@ function CancelToken(executor) {
 CancelToken.prototype.throwIfRequested = function throwIfRequested() {
   if (this.reason) {
     throw this.reason;
-  }
-};
-
-/**
- * Subscribe to the cancel signal
- */
-
-CancelToken.prototype.subscribe = function subscribe(listener) {
-  if (this.reason) {
-    listener(this.reason);
-    return;
-  }
-
-  if (this._listeners) {
-    this._listeners.push(listener);
-  } else {
-    this._listeners = [listener];
-  }
-};
-
-/**
- * Unsubscribe from the cancel signal
- */
-
-CancelToken.prototype.unsubscribe = function unsubscribe(listener) {
-  if (!this._listeners) {
-    return;
-  }
-  var index = this._listeners.indexOf(listener);
-  if (index !== -1) {
-    this._listeners.splice(index, 1);
   }
 };
 
@@ -4408,9 +4172,9 @@ Axios.prototype.request = function request(config) {
 
   if (transitional !== undefined) {
     validator.assertOptions(transitional, {
-      silentJSONParsing: validators.transitional(validators.boolean),
-      forcedJSONParsing: validators.transitional(validators.boolean),
-      clarifyTimeoutError: validators.transitional(validators.boolean)
+      silentJSONParsing: validators.transitional(validators.boolean, '1.0.0'),
+      forcedJSONParsing: validators.transitional(validators.boolean, '1.0.0'),
+      clarifyTimeoutError: validators.transitional(validators.boolean, '1.0.0')
     }, false);
   }
 
@@ -4633,7 +4397,6 @@ var utils = __nccwpck_require__(328);
 var transformData = __nccwpck_require__(9812);
 var isCancel = __nccwpck_require__(4057);
 var defaults = __nccwpck_require__(8190);
-var Cancel = __nccwpck_require__(8875);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -4641,10 +4404,6 @@ var Cancel = __nccwpck_require__(8875);
 function throwIfCancellationRequested(config) {
   if (config.cancelToken) {
     config.cancelToken.throwIfRequested();
-  }
-
-  if (config.signal && config.signal.aborted) {
-    throw new Cancel('canceled');
   }
 }
 
@@ -4759,8 +4518,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
       stack: this.stack,
       // Axios
       config: this.config,
-      code: this.code,
-      status: this.response && this.response.status ? this.response.status : null
+      code: this.code
     };
   };
   return error;
@@ -4790,6 +4548,17 @@ module.exports = function mergeConfig(config1, config2) {
   config2 = config2 || {};
   var config = {};
 
+  var valueFromConfig2Keys = ['url', 'method', 'data'];
+  var mergeDeepPropertiesKeys = ['headers', 'auth', 'proxy', 'params'];
+  var defaultToConfig2Keys = [
+    'baseURL', 'transformRequest', 'transformResponse', 'paramsSerializer',
+    'timeout', 'timeoutMessage', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
+    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress', 'decompress',
+    'maxContentLength', 'maxBodyLength', 'maxRedirects', 'transport', 'httpAgent',
+    'httpsAgent', 'cancelToken', 'socketPath', 'responseEncoding'
+  ];
+  var directMergeKeys = ['validateStatus'];
+
   function getMergedValue(target, source) {
     if (utils.isPlainObject(target) && utils.isPlainObject(source)) {
       return utils.merge(target, source);
@@ -4801,74 +4570,51 @@ module.exports = function mergeConfig(config1, config2) {
     return source;
   }
 
-  // eslint-disable-next-line consistent-return
   function mergeDeepProperties(prop) {
     if (!utils.isUndefined(config2[prop])) {
-      return getMergedValue(config1[prop], config2[prop]);
+      config[prop] = getMergedValue(config1[prop], config2[prop]);
     } else if (!utils.isUndefined(config1[prop])) {
-      return getMergedValue(undefined, config1[prop]);
+      config[prop] = getMergedValue(undefined, config1[prop]);
     }
   }
 
-  // eslint-disable-next-line consistent-return
-  function valueFromConfig2(prop) {
+  utils.forEach(valueFromConfig2Keys, function valueFromConfig2(prop) {
     if (!utils.isUndefined(config2[prop])) {
-      return getMergedValue(undefined, config2[prop]);
+      config[prop] = getMergedValue(undefined, config2[prop]);
     }
-  }
-
-  // eslint-disable-next-line consistent-return
-  function defaultToConfig2(prop) {
-    if (!utils.isUndefined(config2[prop])) {
-      return getMergedValue(undefined, config2[prop]);
-    } else if (!utils.isUndefined(config1[prop])) {
-      return getMergedValue(undefined, config1[prop]);
-    }
-  }
-
-  // eslint-disable-next-line consistent-return
-  function mergeDirectKeys(prop) {
-    if (prop in config2) {
-      return getMergedValue(config1[prop], config2[prop]);
-    } else if (prop in config1) {
-      return getMergedValue(undefined, config1[prop]);
-    }
-  }
-
-  var mergeMap = {
-    'url': valueFromConfig2,
-    'method': valueFromConfig2,
-    'data': valueFromConfig2,
-    'baseURL': defaultToConfig2,
-    'transformRequest': defaultToConfig2,
-    'transformResponse': defaultToConfig2,
-    'paramsSerializer': defaultToConfig2,
-    'timeout': defaultToConfig2,
-    'timeoutMessage': defaultToConfig2,
-    'withCredentials': defaultToConfig2,
-    'adapter': defaultToConfig2,
-    'responseType': defaultToConfig2,
-    'xsrfCookieName': defaultToConfig2,
-    'xsrfHeaderName': defaultToConfig2,
-    'onUploadProgress': defaultToConfig2,
-    'onDownloadProgress': defaultToConfig2,
-    'decompress': defaultToConfig2,
-    'maxContentLength': defaultToConfig2,
-    'maxBodyLength': defaultToConfig2,
-    'transport': defaultToConfig2,
-    'httpAgent': defaultToConfig2,
-    'httpsAgent': defaultToConfig2,
-    'cancelToken': defaultToConfig2,
-    'socketPath': defaultToConfig2,
-    'responseEncoding': defaultToConfig2,
-    'validateStatus': mergeDirectKeys
-  };
-
-  utils.forEach(Object.keys(config1).concat(Object.keys(config2)), function computeConfigValue(prop) {
-    var merge = mergeMap[prop] || mergeDeepProperties;
-    var configValue = merge(prop);
-    (utils.isUndefined(configValue) && merge !== mergeDirectKeys) || (config[prop] = configValue);
   });
+
+  utils.forEach(mergeDeepPropertiesKeys, mergeDeepProperties);
+
+  utils.forEach(defaultToConfig2Keys, function defaultToConfig2(prop) {
+    if (!utils.isUndefined(config2[prop])) {
+      config[prop] = getMergedValue(undefined, config2[prop]);
+    } else if (!utils.isUndefined(config1[prop])) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
+    }
+  });
+
+  utils.forEach(directMergeKeys, function merge(prop) {
+    if (prop in config2) {
+      config[prop] = getMergedValue(config1[prop], config2[prop]);
+    } else if (prop in config1) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
+    }
+  });
+
+  var axiosKeys = valueFromConfig2Keys
+    .concat(mergeDeepPropertiesKeys)
+    .concat(defaultToConfig2Keys)
+    .concat(directMergeKeys);
+
+  var otherKeys = Object
+    .keys(config1)
+    .concat(Object.keys(config2))
+    .filter(function filterAxiosKeys(key) {
+      return axiosKeys.indexOf(key) === -1;
+    });
+
+  utils.forEach(otherKeys, mergeDeepProperties);
 
   return config;
 };
@@ -5024,7 +4770,7 @@ var defaults = {
   }],
 
   transformResponse: [function transformResponse(data) {
-    var transitional = this.transitional || defaults.transitional;
+    var transitional = this.transitional;
     var silentJSONParsing = transitional && transitional.silentJSONParsing;
     var forcedJSONParsing = transitional && transitional.forcedJSONParsing;
     var strictJSONParsing = !silentJSONParsing && this.responseType === 'json';
@@ -5059,12 +4805,12 @@ var defaults = {
 
   validateStatus: function validateStatus(status) {
     return status >= 200 && status < 300;
-  },
+  }
+};
 
-  headers: {
-    common: {
-      'Accept': 'application/json, text/plain, */*'
-    }
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
   }
 };
 
@@ -5078,15 +4824,6 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-
-/***/ }),
-
-/***/ 4322:
-/***/ ((module) => {
-
-module.exports = {
-  "version": "0.24.0"
-};
 
 /***/ }),
 
@@ -5509,7 +5246,7 @@ module.exports = function spread(callback) {
 "use strict";
 
 
-var VERSION = __nccwpck_require__(4322).version;
+var pkg = __nccwpck_require__(696);
 
 var validators = {};
 
@@ -5521,26 +5258,48 @@ var validators = {};
 });
 
 var deprecatedWarnings = {};
+var currentVerArr = pkg.version.split('.');
+
+/**
+ * Compare package versions
+ * @param {string} version
+ * @param {string?} thanVersion
+ * @returns {boolean}
+ */
+function isOlderVersion(version, thanVersion) {
+  var pkgVersionArr = thanVersion ? thanVersion.split('.') : currentVerArr;
+  var destVer = version.split('.');
+  for (var i = 0; i < 3; i++) {
+    if (pkgVersionArr[i] > destVer[i]) {
+      return true;
+    } else if (pkgVersionArr[i] < destVer[i]) {
+      return false;
+    }
+  }
+  return false;
+}
 
 /**
  * Transitional option validator
- * @param {function|boolean?} validator - set to false if the transitional option has been removed
- * @param {string?} version - deprecated version / removed since version
- * @param {string?} message - some message with additional info
+ * @param {function|boolean?} validator
+ * @param {string?} version
+ * @param {string} message
  * @returns {function}
  */
 validators.transitional = function transitional(validator, version, message) {
+  var isDeprecated = version && isOlderVersion(version);
+
   function formatMessage(opt, desc) {
-    return '[Axios v' + VERSION + '] Transitional option \'' + opt + '\'' + desc + (message ? '. ' + message : '');
+    return '[Axios v' + pkg.version + '] Transitional option \'' + opt + '\'' + desc + (message ? '. ' + message : '');
   }
 
   // eslint-disable-next-line func-names
   return function(value, opt, opts) {
     if (validator === false) {
-      throw new Error(formatMessage(opt, ' has been removed' + (version ? ' in ' + version : '')));
+      throw new Error(formatMessage(opt, ' has been removed in ' + version));
     }
 
-    if (version && !deprecatedWarnings[opt]) {
+    if (isDeprecated && !deprecatedWarnings[opt]) {
       deprecatedWarnings[opt] = true;
       // eslint-disable-next-line no-console
       console.warn(
@@ -5586,6 +5345,7 @@ function assertOptions(options, schema, allowUnknown) {
 }
 
 module.exports = {
+  isOlderVersion: isOlderVersion,
   assertOptions: assertOptions,
   validators: validators
 };
@@ -15153,34 +14913,6 @@ module.exports = url => {
 
 	return options;
 };
-
-
-/***/ }),
-
-/***/ 7439:
-/***/ ((module) => {
-
-// https://github.com/electron/electron/issues/2288
-function isElectron() {
-    // Renderer process
-    if (typeof window !== 'undefined' && typeof window.process === 'object' && window.process.type === 'renderer') {
-        return true;
-    }
-
-    // Main process
-    if (typeof process !== 'undefined' && typeof process.versions === 'object' && !!process.versions.electron) {
-        return true;
-    }
-
-    // Detect the user agent when the `nodeIntegration` option is set to true
-    if (typeof navigator === 'object' && typeof navigator.userAgent === 'string' && navigator.userAgent.indexOf('Electron') >= 0) {
-        return true;
-    }
-
-    return false;
-}
-
-module.exports = isElectron;
 
 
 /***/ }),
@@ -26155,6 +25887,14 @@ function wrappy (fn, cb) {
 
 module.exports = eval("require")("encoding");
 
+
+/***/ }),
+
+/***/ 696:
+/***/ ((module) => {
+
+"use strict";
+module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
 
 /***/ }),
 
