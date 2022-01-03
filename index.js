@@ -431,6 +431,23 @@ const writeChartToFile = async (chart, dir, filenamePrefix) => {
   await chart.toFile(`${dir}/${filenamePrefix}-burndown.png`);
 };
 
+const sendSlackMessage = async () => {
+  const web = new WebClient(process.env.SLACK_TOKEN);
+  log.info('WebClient:',WebClient);
+  // The current date
+  const currentTime = new Date().toTimeString();
+  try {
+    // Use the `chat.postMessage` method to send a message from this app
+    await web.chat.postMessage({
+      channel: 'C01TM4WSVH6',
+      text: `The current time is ${currentTime}`,
+    });
+    log.info('Message posted!');
+  } catch (error) {
+    log.info('error:', error);
+  }
+}
+
 const run = async () => {
   const { notion, chartOptions } = parseConfig();
 
@@ -498,20 +515,8 @@ const run = async () => {
   log.info(
     JSON.stringify({ message: "Generated burndown chart", sprint, data })
   );
-  
-  const web = new WebClient(process.env.SLACK_TOKEN);
-  // The current date
-  const currentTime = new Date().toTimeString();
-  try {
-    // Use the `chat.postMessage` method to send a message from this app
-    await web.chat.postMessage({
-      channel: 'C01TM4WSVH6',
-      text: `The current time is ${currentTime}`,
-    });
-    log.info('Message posted!');
-  } catch (error) {
-    log.info(error);
-  }
+  await sendSlackMessage();
+
 };
 
 run();
