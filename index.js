@@ -437,7 +437,7 @@ const sendSlackMessage = async (filename) => {
   const currentTime = new Date().toTimeString();
   let image_url = `https://raw.githubusercontent.com/ezlukeyuan/notion-burndown/master/out/${filename}-burndown.png`;
   let message =
-      [{"type":"image","title":{"type":"plain_text","text":"burndown","emoji":true},"image_url":"${image_url}","alt_text":"marg"}];
+      JSON.stringify([{"type":"image","title":{"type":"plain_text","text":"burndown","emoji":true},"image_url":"${image_url}","alt_text":"marg"}]);
   try {
     // Use the `chat.postMessage` method to send a message from this app
     await web.chat.postMessage({
