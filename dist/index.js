@@ -26819,13 +26819,13 @@ const sendSlackMessage = async (filename,demo,goal) => {
   let image_url = `https://raw.githubusercontent.com/ezlukeyuan/notion-burndown/master/out/${filename}-burndown.png`;
   let message = JSON.stringify([{"type":"image","title":{"type":"plain_text","text":"burndown","emoji":true},"image_url":image_url,"alt_text":"marg"},
                                 {"type":"section","text":{"type":"mrkdwn","text":"<"+image_url+"|this is a link>"}},
-                                {"type":"section","text":{"type":"plain_text","text":filename+"\nDemo日："+demo+"\n目標："+goal,"emoji":true}}]);
+                                {"type":"section","text":{"type":"plain_text","text":filename+"\n\nDemo日："+demo+"\n\n目標：\n"+goal,"emoji":true}}]);
   log.info("message:",message);
   try {
     // Use the `chat.postMessage` method to send a message from this app
     await web.chat.postMessage({
-      channel: 'C0234HEGCT0',
-      text:'AAAA',
+      channel: 'C01TM4WSVH6',
+      text:'每日Sprint目標',
       blocks: message
     });
     log.info('Message posted!');
