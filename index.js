@@ -442,6 +442,7 @@ const sendSlackMessage = async (filename) => {
     // Use the `chat.postMessage` method to send a message from this app
     await web.chat.postMessage({
       channel: 'C0234HEGCT0',
+      text:'AAAA',
       blocks: message
     });
     log.info('Message posted!');
