@@ -26813,7 +26813,7 @@ const writeChartToFile = async (chart, dir, filenamePrefix) => {
 };
 
 const sendSlackMessage = async () => {
-  const web = new WebClient("xoxb-1483130262021-2907703155361-bOUwWhnxiDOIspCyB84cvj0P");
+  const web = new WebClient(process.env.SLACK_TOKEN);
   log.info('WebClient:',WebClient);
   log.info('SLACK_TOKEN:',process.env.SLACK_TOKEN);
   // The current date
