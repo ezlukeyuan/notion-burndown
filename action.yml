@@ -25,13 +25,13 @@ inputs:
   NOTION_PROPERTY_PATTERN_STATUS_EXCLUDE:
     description: "Regex of the statuses of stories which are done"
     required: true
+  SLACK_TOKEN:
+    description: "SLACK_TOKEN"
+    required: true
   INCLUDE_WEEKENDS:
     description: "True if weekends should be included in the chart, false otherwise."
     required: false
     default: "true"
-  SLACK_TOKEN:
-    description: "slack token"
-    required: false
 runs:
   using: "node12"
   main: "index.js"
