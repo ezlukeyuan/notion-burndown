@@ -26482,6 +26482,12 @@ const countPointsLeftInSprint = async (
       select: {
         is_not_empty: true,
       },
+    },
+    {
+      property: "Type",
+      select: {
+        equals: "Story",
+      },
     },]
     }
   });
