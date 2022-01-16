@@ -26508,7 +26508,7 @@ const countPointsLeftInSprint = async (
   }, 0);
 
   
-  let myProgress = ongoingStories.reduce(function (accum, value) {
+  let myProgress = ongoingStories.reduce(function (accum, item) {
     if (item.properties["Progress"]) {
       const Number = item.properties["Progress"].number;
       return accum + Number;
