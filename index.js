@@ -268,7 +268,7 @@ const getPointsLeftByDay = async (
       pointsLeftByDay[i] = 0;
     }
     if (!progressByDay[i]) {
-      progressByDay[i] = 1;
+      progressByDay[i] = 0;
     }
   }
   log.info(JSON.stringify({ numDaysSinceSprintStart }));
@@ -423,8 +423,9 @@ const generateChart = (data, idealBurndown, labels, demo, goal, progressByDay) =
           },
           {
             label: "Constant",
-            backgroundColor: "rgba(75,+192,+192,+.5)",
+            number:[5, 15],
             data: progressByDay,
+            fill: 'origin',
             yAxisID: 'y2',
           },
         ],
@@ -464,9 +465,6 @@ const generateChart = (data, idealBurndown, labels, demo, goal, progressByDay) =
             {
               type: 'linear',
               position: 'right',
-              gridLines: {
-                drawOnChartArea: false
-              },
               id: 'y2',
             },
           ],
