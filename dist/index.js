@@ -26796,14 +26796,14 @@ const generateChart = (data, idealBurndown, labels, demo, goal, progressByDay) =
             yAxisID: 'y1',
           },
           {
-            label: "Constant",
+            label: "Ideal",
             borderColor: "#cad0d6",
             backgroundColor: "rgba(54,+162,+235,+.5)",
             data: idealBurndown,
             yAxisID: 'y1',
           },
           {
-            label: "Constant",
+            label: "Progress %",
             number:[5, 15],
             data: progressByDay,
             fill: 'origin',
@@ -26820,7 +26820,12 @@ const generateChart = (data, idealBurndown, labels, demo, goal, progressByDay) =
 //             display: true,
 //             text: goal.unshift('燃盡圖','Demo:'+ demo),
 //         },
-        legend: { display: false },
+        legend: {
+          display: true,
+          labels: {
+              fontColor: 'rgb(255, 99, 132)'
+          },
+        },
         scales: {
           xAxes: [
             {
@@ -26846,6 +26851,17 @@ const generateChart = (data, idealBurndown, labels, demo, goal, progressByDay) =
             {
               type: 'linear',
               position: 'right',
+              scaleLabel: {
+                display: true,
+                labelString: "Progress %",
+              },
+              ticks: {
+                beginAtZero: true,
+                max:1,
+                callback: function(value, index, values) {
+                  return (value * 100).toFixed(2) ;
+                }
+              },
               id: 'y2',
             },
           ],
