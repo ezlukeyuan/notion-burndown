@@ -178,7 +178,7 @@ const updateDailySummaryTable = async (
         date: { start: today, end: null },
       },
       Progress: {
-        number: Progress,
+        number: progressNow,
       },
     },
   });
