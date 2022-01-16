@@ -443,6 +443,7 @@ const generateChart = (data, idealBurndown, labels, demo, goal, progressByDay) =
           display: true,
           labels: {
               fontColor: 'rgb(255, 99, 132)'
+          },
         },
         scales: {
           xAxes: [
