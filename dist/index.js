@@ -26506,14 +26506,15 @@ const countPointsLeftInSprint = async (
     }
     return accum;
   }, 0);
-  log.info(
-    JSON.stringify({ message: "ongoingStories:", ongoingStories })
-  );
+
   
   let myProgress = ongoingStories.reduce(function (accum, item) {
+    log.info(
+      JSON.stringify({ accum, item })
+    );
     if (item.properties["Progress"]) {
-      const Number = item.properties["Progress"].formula.number;
-      return accum + Number;
+      const myNumber = item.properties["Progress"].formula.number;
+      return accum + myNumber;
     }
     return accum;
   }, 0) / ongoingStories.length;
