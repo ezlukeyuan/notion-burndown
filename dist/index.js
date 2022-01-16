@@ -26859,7 +26859,7 @@ const generateChart = (data, idealBurndown, labels, demo, goal, progressByDay) =
                 beginAtZero: true,
                 max:1,
                 callback: function(value, index, values) {
-                  return (value * 100).toFixed(2) ;
+                  return `${(value * 100)} % `;
                 }
               },
               id: 'y2',
