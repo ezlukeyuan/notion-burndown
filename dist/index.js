@@ -26512,9 +26512,9 @@ const countPointsLeftInSprint = async (
 
     if (item.properties.Progress) {
       const myNumber = item.properties.Progress.formula.number;
-      log.info(
-        JSON.stringify({ item,myNumber})
-      );
+//       log.info(
+//         JSON.stringify({ item,myNumber})
+//       );
       return accum + myNumber;
     }
     return accum;
@@ -26626,9 +26626,10 @@ const getPointsLeftByDay = async (
     ],
   });
   const pointsLeftByDay = [];
+  const progressByDay = [];
   response.results.forEach((result) => {
     const { properties } = result;
-    const { Date, Points } = properties;
+    const { Date, Points ,Progress } = properties;
     const day = moment(Date.date.start).diff(start, "days");
     if (pointsLeftByDay[day]) {
       log.warn(
@@ -26640,11 +26641,15 @@ const getPointsLeftByDay = async (
       );
     }
     pointsLeftByDay[day] = Points.number;
+    progressByDay[day] = Progress.number;
   });
   const numDaysSinceSprintStart = moment().startOf("day").diff(start, "days");
   for (let i = 0; i < numDaysSinceSprintStart; i += 1) {
     if (!pointsLeftByDay[i]) {
       pointsLeftByDay[i] = 0;
+    }
+    if (!progressByDay[i]) {
+      progressByDay[i] = 1;
     }
   }
   log.info(JSON.stringify({ numDaysSinceSprintStart }));
@@ -26659,13 +26664,14 @@ const getPointsLeftByDay = async (
     ) {
       if (isWeekend(cur)) {
         pointsLeftByDay.splice(index, 1);
+        progressByDay.splice(index, 1);
       } else {
         index += 1;
       }
     }
   }
 
-  return pointsLeftByDay;
+  return {pointsLeftByDay,progressByDay};
 };
 /**
  * Generates the ideal burndown line for the sprint. Work is assumed to be done on
@@ -26754,7 +26760,7 @@ const getChartDatasets = async (
   const lastFullDay = moment(end).add(-1, "days");
   const numWeekdays = getNumberOfWeekdays(start, lastFullDay);
 
-  const pointsLeftByDay = await getPointsLeftByDay(
+  const {pointsLeftByDay, progressByDay } = await getPointsLeftByDay(
     notion,
     dailySummaryDb,
     sprint,
@@ -26772,10 +26778,10 @@ const getChartDatasets = async (
     isIncludeWeekends ? numDaysInSprint : numWeekdays + 1
   );
 
-  return { labels, pointsLeftByDay, idealBurndown };
+  return { labels, pointsLeftByDay, idealBurndown, progressByDay };
 };
 
-const generateChart = (data, idealBurndown, labels , demo, goal) => {
+const generateChart = (data, idealBurndown, labels, demo, goal, progressByDay) => {
   const chart = ChartJSImage()
     .chart({
       type: "line",
@@ -26787,12 +26793,21 @@ const generateChart = (data, idealBurndown, labels , demo, goal) => {
             borderColor: "#ef4444",
             backgroundColor: "rgba(255,+99,+132,+.5)",
             data,
+            yAxisID: 'y1',
           },
           {
             label: "Constant",
             borderColor: "#cad0d6",
             backgroundColor: "rgba(54,+162,+235,+.5)",
             data: idealBurndown,
+            yAxisID: 'y1',
+          },
+          {
+            label: "Constant",
+            borderColor: "#cad0d6",
+            backgroundColor: "rgba(54,+162,+235,+.5)",
+            data: progressByDay,
+            yAxisID: 'y2',
           },
         ],
       },
@@ -26927,6 +26942,7 @@ const run = async () => {
     labels,
     pointsLeftByDay: data,
     idealBurndown,
+    progressByDay
   } = await getChartDatasets(
     notion.client,
     notion.databases.dailySummary,
@@ -26939,7 +26955,7 @@ const run = async () => {
   );
   log.info(JSON.stringify({ labels, data, idealBurndown }));
 //   let mytitle = "燃盡圖|Demo日期:" + demo +"|目標:" + goal ;
-  const chart = generateChart(data, idealBurndown, labels, demo , goal);
+  const chart = generateChart(data, idealBurndown, labels, demo, goal, progressByDay);
   let mainfilename = `sprint${sprint}-${Date.now()}`;
   await writeChartToFile(chart, "./out", mainfilename);
   await writeChartToFile(chart, "./out", `sprint${sprint}-latest`);
