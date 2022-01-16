@@ -26520,10 +26520,13 @@ const countPointsLeftInSprint = async (
     return accum;
   }, 0) / ongoingStories.length;
 
+  log.info(
+    JSON.stringify({ myProgress})
+  );
   
   return {
     pointsLeftInSprint:myPointLeft,
-    progressN:myProgress,
+    progressNow:myProgress,
   }
 };
 
