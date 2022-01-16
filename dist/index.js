@@ -26804,8 +26804,7 @@ const generateChart = (data, idealBurndown, labels, demo, goal, progressByDay) =
           },
           {
             label: "Constant",
-            borderColor: "#cad0d6",
-            backgroundColor: "rgba(54,+162,+235,+.5)",
+            backgroundColor: "rgba(75,+192,+192,+.5)",
             data: progressByDay,
             yAxisID: 'y2',
           },
