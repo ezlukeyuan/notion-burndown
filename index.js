@@ -137,8 +137,8 @@ const countPointsLeftInSprint = async (
 
   
   return {
-    pointLeft:myPointLeft,
-    progress:myProgress,
+    pointsLeftInSprint:myPointLeft,
+    progressN:myProgress,
   }
 };
 
