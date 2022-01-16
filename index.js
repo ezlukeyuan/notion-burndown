@@ -472,11 +472,14 @@ const generateChart = (data, idealBurndown, labels, demo, goal, progressByDay) =
               position: 'right',
               scaleLabel: {
                 display: true,
-                labelString: "Points Left",
+                labelString: "Progress %",
               },
               ticks: {
                 beginAtZero: true,
                 max:1,
+                callback: function(value, index, values) {
+                  return (value * 100).toFixed(2) ;
+                }
               },
               id: 'y2',
             },
