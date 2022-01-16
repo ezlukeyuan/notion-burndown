@@ -419,6 +419,15 @@ const generateChart = (data, idealBurndown, labels , demo, goal) => {
                 beginAtZero: true,
                 max: Math.max(...data),
               },
+              id: 'y1',
+            },
+            {
+              type: 'linear',
+              position: 'right',
+              gridLines: {
+                drawOnChartArea: false
+              },
+              id: 'y2',
             },
           ],
         },
@@ -449,7 +458,8 @@ const sendSlackMessage = async (filename,demo,goal) => {
   try {
     // Use the `chat.postMessage` method to send a message from this app
     await web.chat.postMessage({
-      channel: 'C01TM4WSVH6',
+//       channel: 'C01TM4WSVH6',
+      channel: 'C0234HEGCT0',
       text:'每日Sprint目標',
       blocks: message
     });
