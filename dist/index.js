@@ -26499,20 +26499,36 @@ const countPointsLeftInSprint = async (
     (item) =>
       !new RegExp(statusExclude).test(item.properties.Status.select.name)
   );
-  return ongoingStories.reduce((accum, item) => {
+  let myPointLeft = ongoingStories.reduce((accum, item) => {
     if (item.properties[estimateProp]) {
       const points = item.properties[estimateProp].number;
       return accum + points;
     }
     return accum;
   }, 0);
+
+  
+  let myProgress = ongoingStories.reduce(function (accum, value) {
+    if (item.properties["Progress"]) {
+      const Number = item.properties["Progress"].number;
+      return accum + Number;
+    }
+    return accum;
+  }, 0) / ongoingStories.length;
+
+  
+  return {
+    pointLeft:myPointLeft,
+    progress:myProgress,
+  }
 };
 
 const updateDailySummaryTable = async (
   notion,
   dailySummaryDb,
   sprint,
-  pointsLeft
+  pointsLeft,
+  progressNow
 ) => {
   const today = moment().startOf("day").format("YYYY-MM-DD");
   const create_result = await notion.pages.create({
@@ -26541,6 +26557,9 @@ const updateDailySummaryTable = async (
       },
       Date: {
         date: { start: today, end: null },
+      },
+      Progress: {
+        number: Progress,
       },
     },
   });
@@ -26862,7 +26881,7 @@ const run = async () => {
     JSON.stringify({ message: "Found latest sprint", sprint, start, end })
   );
 
-  const pointsLeftInSprint = await countPointsLeftInSprint(
+  const {pointsLeftInSprint,progressNow} = await countPointsLeftInSprint(
     notion.client,
     notion.databases.backlog,
     sprint,
@@ -26877,6 +26896,7 @@ const run = async () => {
       message: "Counted points left in sprint",
       sprint,
       pointsLeftInSprint,
+      progressNow,
     })
   );
 
@@ -26884,13 +26904,15 @@ const run = async () => {
     notion.client,
     notion.databases.dailySummary,
     sprint,
-    pointsLeftInSprint
+    pointsLeftInSprint,
+    progressNow
   );
   log.info(
     JSON.stringify({
       message: "Updated daily summary table",
       sprint,
       pointsLeftInSprint,
+      progressNow,
     })
   );
 
