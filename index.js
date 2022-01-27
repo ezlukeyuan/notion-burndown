@@ -531,7 +531,9 @@ const sendImgure = async (filestreambase64) => {
       type: 'base64',
     },
   ]);
-  imgResponse.data.forEach((r) => log.info(JSON.stringify({r.link})));
+  imgResponse.data.forEach((r) => {
+    log.info('r.link:', r.link);
+  };
   
 }
 
