@@ -1,5 +1,6 @@
 const { Client } = require("@notionhq/client");
 const { WebClient } = require("@slack/web-api");
+const { ImgurClient } = require('imgur');
 const moment = require("moment");
 const ChartJSImage = require("chart.js-image");
 const log = require("loglevel");
@@ -495,6 +496,7 @@ const writeChartToFile = async (chart, dir, filenamePrefix) => {
     fs.mkdirSync(dir);
   }
   await chart.toFile(`${dir}/${filenamePrefix}-burndown.png`);
+  await sendImgure(chart.toBase64Image());
 };
 
 const sendSlackMessage = async (filename,demo,goal) => {
@@ -518,6 +520,19 @@ const sendSlackMessage = async (filename,demo,goal) => {
   } catch (error) {
     log.info('error:', error);
   }
+}
+
+const sendImgure = async (filestreambase64) => {
+  const imgClient = new imgur({ clientId: '24326b5607ef0ce' });
+  
+  const imgResponse = await imgClient.upload([
+    {
+      image: filestreambase64,
+      type: 'base64',
+    },
+  ]);
+  imgResponse.data.forEach((r) => log.info(JSON.stringify({r.link})));
+  
 }
 
 const run = async () => {
