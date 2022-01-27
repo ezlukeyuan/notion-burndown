@@ -27742,7 +27742,8 @@ const writeChartToFile = async (chart, dir, filenamePrefix) => {
     fs.mkdirSync(dir);
   }
   await chart.toFile(`${dir}/${filenamePrefix}-burndown.png`);
-  await sendImgure(chart.toDataURI());
+  let myBase64 = chart.toDataURI();
+  await sendImgure(myBase64);
 };
 
 const sendSlackMessage = async (filename,demo,goal) => {
