@@ -5,7 +5,7 @@
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"@slack/web-api","version":"6.5.1","description":"Official library for using the Slack Platform\'s Web API","author":"Slack Technologies, LLC","license":"MIT","keywords":["slack","web-api","bot","client","http","api","proxy","rate-limiting","pagination"],"main":"dist/index.js","types":"./dist/index.d.ts","files":["dist/**/*"],"engines":{"node":">= 12.13.0","npm":">= 6.12.0"},"repository":"slackapi/node-slack-sdk","homepage":"https://slack.dev/node-slack-sdk/web-api","publishConfig":{"access":"public"},"bugs":{"url":"https://github.com/slackapi/node-slack-sdk/issues"},"scripts":{"prepare":"npm run build","build":"npm run build:clean && tsc","build:clean":"shx rm -rf ./dist ./coverage ./.nyc_output","lint":"eslint --ext .ts src","test":"npm run lint && npm run build && npm run test:mocha && npm run test:types","test:mocha":"nyc mocha --config .mocharc.json src/*.spec.js","test:types":"tsd","coverage":"codecov -F webapi --root=$PWD","ref-docs:model":"api-extractor run","watch":"npx nodemon --watch \'src\' --ext \'ts\' --exec npm run build","build:deno":"esbuild --bundle --define:process.cwd=String --define:process.version=\'\\"v16.0.0\\"\' --define:Buffer=dummy_buffer --inject:./deno-shims/buffer-shim.js --target=esnext --format=esm --outfile=./mod.js src/index.ts"},"dependencies":{"@slack/logger":"^3.0.0","@slack/types":"^2.0.0","@types/is-stream":"^1.1.0","@types/node":">=12.0.0","axios":"^0.24.0","eventemitter3":"^3.1.0","form-data":"^2.5.0","is-stream":"^1.1.0","p-queue":"^6.6.1","p-retry":"^4.0.0","is-electron":"2.2.0"},"devDependencies":{"@aoberoi/capture-console":"^1.1.0","@microsoft/api-extractor":"^7.3.4","@types/chai":"^4.1.7","@types/mocha":"^5.2.6","@typescript-eslint/eslint-plugin":"^4.4.1","@typescript-eslint/parser":"^4.4.0","busboy":"^0.3.0","chai":"^4.2.0","codecov":"^3.2.0","esbuild":"^0.13.15","eslint":"^7.32.0","eslint-config-airbnb-base":"^14.2.1","eslint-config-airbnb-typescript":"^12.3.1","eslint-plugin-import":"^2.22.1","eslint-plugin-jsdoc":"^30.6.1","eslint-plugin-node":"^11.1.0","mocha":"^9.1.0","nock":"^13.1.0","nyc":"^14.1.1","shelljs":"^0.8.3","shx":"^0.3.2","sinon":"^7.2.7","source-map-support":"^0.5.10","ts-node":"^9.0.0","tsd":"^0.13.1","typescript":"^4.1"},"tsd":{"directory":"test/types"}}');
+module.exports = JSON.parse('{"name":"@slack/web-api","version":"6.6.0","description":"Official library for using the Slack Platform\'s Web API","author":"Slack Technologies, LLC","license":"MIT","keywords":["slack","web-api","bot","client","http","api","proxy","rate-limiting","pagination"],"main":"dist/index.js","types":"./dist/index.d.ts","files":["dist/**/*"],"engines":{"node":">= 12.13.0","npm":">= 6.12.0"},"repository":"slackapi/node-slack-sdk","homepage":"https://slack.dev/node-slack-sdk/web-api","publishConfig":{"access":"public"},"bugs":{"url":"https://github.com/slackapi/node-slack-sdk/issues"},"scripts":{"prepare":"npm run build","build":"npm run build:clean && tsc","build:clean":"shx rm -rf ./dist ./coverage ./.nyc_output","lint":"eslint --ext .ts src","test":"npm run lint && npm run build && npm run test:mocha && npm run test:types","test:mocha":"nyc mocha --config .mocharc.json src/*.spec.js","test:types":"tsd","coverage":"codecov -F webapi --root=$PWD","ref-docs:model":"api-extractor run","watch":"npx nodemon --watch \'src\' --ext \'ts\' --exec npm run build","build:deno":"esbuild --bundle --define:process.cwd=String --define:process.version=\'\\"v1.15.2\\"\' --define:process.title=\'\\"deno\\"\' --define:Buffer=dummy_buffer --inject:./deno-shims/buffer-shim.js --inject:./deno-shims/xhr-shim.js --target=esnext --format=esm --outfile=./mod.js src/index.ts"},"dependencies":{"@slack/logger":"^3.0.0","@slack/types":"^2.0.0","@types/is-stream":"^1.1.0","@types/node":">=12.0.0","axios":"^0.25.0","eventemitter3":"^3.1.0","form-data":"^2.5.0","is-electron":"2.2.0","is-stream":"^1.1.0","p-queue":"^6.6.1","p-retry":"^4.0.0"},"devDependencies":{"@aoberoi/capture-console":"^1.1.0","@microsoft/api-extractor":"^7.3.4","@types/chai":"^4.1.7","@types/mocha":"^5.2.6","@typescript-eslint/eslint-plugin":"^4.4.1","@typescript-eslint/parser":"^4.4.0","busboy":"^0.3.0","chai":"^4.2.0","codecov":"^3.2.0","esbuild":"^0.13.15","eslint":"^7.32.0","eslint-config-airbnb-base":"^14.2.1","eslint-config-airbnb-typescript":"^12.3.1","eslint-plugin-import":"^2.22.1","eslint-plugin-jsdoc":"^30.6.1","eslint-plugin-node":"^11.1.0","mocha":"^9.1.0","nock":"^13.1.0","nyc":"^15.1.0","shelljs":"^0.8.3","shx":"^0.3.2","sinon":"^7.2.7","source-map-support":"^0.5.10","ts-node":"^9.0.0","tsd":"^0.13.1","typescript":"^4.1"},"tsd":{"directory":"test/types"}}');
 
 /***/ }),
 
@@ -2356,6 +2356,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getUserAgent = exports.addAppMetadata = void 0;
 const os = __importStar(__nccwpck_require__(2087));
+const path_1 = __nccwpck_require__(5622);
 // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-commonjs
 const packageJson = __nccwpck_require__(9557);
 /**
@@ -2364,8 +2365,14 @@ const packageJson = __nccwpck_require__(9557);
 function replaceSlashes(s) {
     return s.replace('/', ':');
 }
+// TODO: for the deno build (see the `npm run build:deno` npm run script), we could replace the `os-browserify` npm
+// module shim with our own shim leveraging the deno beta compatibility layer for node's `os` module (for more info
+// see https://deno.land/std@0.116.0/node/os.ts). At the time of writing this TODO (2021/11/25), this required deno
+// v1.16.2 and use of the --unstable flag. Once support for this exists without the --unstable flag, we can improve
+// the `os` module deno shim to correctly report operating system from a deno runtime. Until then, the below `os`-
+// based code will report "browser/undefined" from a deno runtime.
 const baseUserAgent = `${replaceSlashes(packageJson.name)}/${packageJson.version} ` +
-    `node/${process.version.replace('v', '')} ` +
+    `${(0, path_1.basename)(process.title)}/${process.version.replace('v', '')} ` +
     `${os.platform()}/${os.release()}`;
 const appMetadata = {};
 /**
@@ -2476,6 +2483,7 @@ class Methods extends eventemitter3_1.EventEmitter {
                 },
                 clearResolution: bindApiCall(this, 'admin.apps.clearResolution'),
                 requests: {
+                    cancel: bindApiCall(this, 'admin.apps.requests.cancel'),
                     list: bindApiCall(this, 'admin.apps.requests.list'),
                 },
                 restrict: bindApiCall(this, 'admin.apps.restrict'),
@@ -3594,8 +3602,10 @@ module.exports = function httpAdapter(config) {
       done();
       resolvePromise(value);
     };
+    var rejected = false;
     var reject = function reject(value) {
       done();
+      rejected = true;
       rejectPromise(value);
     };
     var data = config.data;
@@ -3631,6 +3641,10 @@ module.exports = function httpAdapter(config) {
           'Data after transformation must be a string, an ArrayBuffer, a Buffer, or a Stream',
           config
         ));
+      }
+
+      if (config.maxBodyLength > -1 && data.length > config.maxBodyLength) {
+        return reject(createError('Request body larger than maxBodyLength limit', config));
       }
 
       // Add Content-Length header if data exists
@@ -3803,10 +3817,20 @@ module.exports = function httpAdapter(config) {
 
           // make sure the content length is not over the maxContentLength if specified
           if (config.maxContentLength > -1 && totalResponseBytes > config.maxContentLength) {
+            // stream.destoy() emit aborted event before calling reject() on Node.js v16
+            rejected = true;
             stream.destroy();
             reject(createError('maxContentLength size of ' + config.maxContentLength + ' exceeded',
               config, null, lastRequest));
           }
+        });
+
+        stream.on('aborted', function handlerStreamAborted() {
+          if (rejected) {
+            return;
+          }
+          stream.destroy();
+          reject(createError('error request aborted', config, 'ERR_REQUEST_ABORTED', lastRequest));
         });
 
         stream.on('error', function handleStreamError(err) {
@@ -3815,15 +3839,18 @@ module.exports = function httpAdapter(config) {
         });
 
         stream.on('end', function handleStreamEnd() {
-          var responseData = Buffer.concat(responseBuffer);
-          if (config.responseType !== 'arraybuffer') {
-            responseData = responseData.toString(config.responseEncoding);
-            if (!config.responseEncoding || config.responseEncoding === 'utf8') {
-              responseData = utils.stripBOM(responseData);
+          try {
+            var responseData = responseBuffer.length === 1 ? responseBuffer[0] : Buffer.concat(responseBuffer);
+            if (config.responseType !== 'arraybuffer') {
+              responseData = responseData.toString(config.responseEncoding);
+              if (!config.responseEncoding || config.responseEncoding === 'utf8') {
+                responseData = utils.stripBOM(responseData);
+              }
             }
+            response.data = responseData;
+          } catch (err) {
+            reject(enhanceError(err, config, err.code, response.request, response));
           }
-
-          response.data = responseData;
           settle(resolve, reject, response);
         });
       }
@@ -3833,6 +3860,12 @@ module.exports = function httpAdapter(config) {
     req.on('error', function handleRequestError(err) {
       if (req.aborted && err.code !== 'ERR_FR_TOO_MANY_REDIRECTS') return;
       reject(enhanceError(err, config, null, req));
+    });
+
+    // set tcp keep alive to prevent drop connection by peer
+    req.on('socket', function handleRequestSocket(socket) {
+      // default interval of sending ack packet is 1 minute
+      socket.setKeepAlive(true, 1000 * 60);
     });
 
     // Handle request timeout
@@ -4383,14 +4416,18 @@ function Axios(instanceConfig) {
  *
  * @param {Object} config The config specific for this request (merged with this.defaults)
  */
-Axios.prototype.request = function request(config) {
+Axios.prototype.request = function request(configOrUrl, config) {
   /*eslint no-param-reassign:0*/
   // Allow for axios('example/url'[, config]) a la fetch API
-  if (typeof config === 'string') {
-    config = arguments[1] || {};
-    config.url = arguments[0];
-  } else {
+  if (typeof configOrUrl === 'string') {
     config = config || {};
+    config.url = configOrUrl;
+  } else {
+    config = configOrUrl || {};
+  }
+
+  if (!config.url) {
+    throw new Error('Provided config url is not valid');
   }
 
   config = mergeConfig(this.defaults, config);
@@ -4475,6 +4512,9 @@ Axios.prototype.request = function request(config) {
 };
 
 Axios.prototype.getUri = function getUri(config) {
+  if (!config.url) {
+    throw new Error('Provided config url is not valid');
+  }
   config = mergeConfig(this.defaults, config);
   return buildURL(config.url, config.params, config.paramsSerializer).replace(/^\?/, '');
 };
@@ -5085,7 +5125,7 @@ module.exports = defaults;
 /***/ ((module) => {
 
 module.exports = {
-  "version": "0.24.0"
+  "version": "0.25.0"
 };
 
 /***/ }),
@@ -5286,17 +5326,19 @@ module.exports = function isAbsoluteURL(url) {
   // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
   // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
   // by any combination of letters, digits, plus, period, or hyphen.
-  return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
+  return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url);
 };
 
 
 /***/ }),
 
 /***/ 650:
-/***/ ((module) => {
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
+
+var utils = __nccwpck_require__(328);
 
 /**
  * Determines whether the payload is an error thrown by Axios
@@ -5305,7 +5347,7 @@ module.exports = function isAbsoluteURL(url) {
  * @returns {boolean} True if the payload is an error thrown by Axios, otherwise false
  */
 module.exports = function isAxiosError(payload) {
-  return (typeof payload === 'object') && (payload.isAxiosError === true);
+  return utils.isObject(payload) && (payload.isAxiosError === true);
 };
 
 
@@ -5612,7 +5654,7 @@ var toString = Object.prototype.toString;
  * @returns {boolean} True if value is an Array, otherwise false
  */
 function isArray(val) {
-  return toString.call(val) === '[object Array]';
+  return Array.isArray(val);
 }
 
 /**
@@ -5653,7 +5695,7 @@ function isArrayBuffer(val) {
  * @returns {boolean} True if value is an FormData, otherwise false
  */
 function isFormData(val) {
-  return (typeof FormData !== 'undefined') && (val instanceof FormData);
+  return toString.call(val) === '[object FormData]';
 }
 
 /**
@@ -5667,7 +5709,7 @@ function isArrayBufferView(val) {
   if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
     result = ArrayBuffer.isView(val);
   } else {
-    result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);
+    result = (val) && (val.buffer) && (isArrayBuffer(val.buffer));
   }
   return result;
 }
@@ -5774,7 +5816,7 @@ function isStream(val) {
  * @returns {boolean} True if value is a URLSearchParams object, otherwise false
  */
 function isURLSearchParams(val) {
-  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
+  return toString.call(val) === '[object URLSearchParams]';
 }
 
 /**
@@ -15152,6 +15194,538 @@ module.exports = url => {
 	}
 
 	return options;
+};
+
+
+/***/ }),
+
+/***/ 8370:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+!function(e,t){if(true)module.exports=t();else { var i, r; }}(global,(function(){return(()=>{"use strict";var e={n:t=>{var r=t&&t.__esModule?()=>t.default:()=>t;return e.d(r,{a:r}),r},d:(t,r)=>{for(var i in r)e.o(r,i)&&!e.o(t,i)&&Object.defineProperty(t,i,{enumerable:!0,get:r[i]})},o:(e,t)=>Object.prototype.hasOwnProperty.call(e,t),r:e=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})}},t={};e.r(t),e.d(t,{ImgurClient:()=>m,default:()=>g,getAuthorizationHeader:()=>n});const r=__nccwpck_require__(3576),i=__nccwpck_require__(8614),a="https://api.imgur.com";function n(e){return(0,r.__awaiter)(this,void 0,void 0,(function*(){if(void 0!==e.credentials.accessToken)return`Bearer ${e.credentials.accessToken}`;const{clientId:t,clientSecret:r,refreshToken:i}=e.credentials;if(void 0!==e.credentials.refreshToken){const n={url:"oauth2/token",baseURL:a,method:"POST",data:{client_id:t,client_secret:r,refresh_token:i,grant_type:"refresh_token"}},o=yield e.plainRequest(n);if(200===o.status&&o.data){const{access_token:t,refresh_token:r}=o.data;return e.credentials.accessToken=t,e.credentials.refreshToken=r,`Bearer ${t}`}}return function(e){return void 0!==e.clientId}(e.credentials)?`Client-ID ${t}`:null}))}const o=__nccwpck_require__(5234);var s=e.n(o);function d(e){const t=new(s());if("string"==typeof e)return t.append("image",e),t;for(const[r,i]of Object.entries(e)){const a=["base64","stream"];-1!==a.indexOf(r)?-1!==a.indexOf(e.type)&&t.append(r,e):t.append(r,i)}return t.getHeaders=t.getHeaders?t.getHeaders:()=>({"Content-Type":"multipart/form-data"}),t}function u(e){var t,r,i,a,n,o,s,d,u,c;let l,p=!0,h=200;const f=e&&(void 0!==e.status||void 0!==(null===(t=e.data)||void 0===t?void 0:t.status))&&void 0!==e.data,v=f&&!!e.data.success,m=f&&!v&&(void 0!==(null===(r=e.data.data)||void 0===r?void 0:r.error)||void 0!==e.data.errors);var g;return void 0===e?(l="response was empty",h=500,p=!1):"string"==typeof e?(l=e,h=500,p=!1):v?(p=e.data.success,h=e.data.status,l=e.data.data.error?e.data.data.error:e.data.data):(p=!1,h=null!==(o=null!==(n=null===(a=null===(i=e.data.data)||void 0===i?void 0:i.error)||void 0===a?void 0:a.code)&&void 0!==n?n:e.status)&&void 0!==o?o:e.data.status,g=m?null!==(d=null!==(s=e.data.errors)&&void 0!==s?s:e.data.data.error.message)&&void 0!==d?d:e.data.data.error:null!==(c=null!==(u=e.data.data)&&void 0!==u?u:e.data.message)&&void 0!==c?c:e.data,l=Array.isArray(g)?g.map((e=>m?e.detail:e.data)):g),{data:l,status:h,success:p}}function c(e){return"string"==typeof e.title||"string"==typeof e.description}const l=__nccwpck_require__(8835),p={section:"hot",sort:"viral"};const h=["q_all","q_any","q_exactly","q_not","q_type","q_size_px"];const f=__nccwpck_require__(6545);var v=e.n(f);class m extends i.EventEmitter{constructor(e){var t,i,o;super(),this.credentials=e,this.credentials.rapidApiHost=(null===(t=e.rapidApiKey)||void 0===t?void 0:t.length)?null!==(i=e.rapidApiHost)&&void 0!==i?i:"imgur-apiv3.p.rapidapi.com":e.rapidApiHost;const s="undefined"!=typeof window?{}:{"user-agent":"imgur (https://github.com/keneucker/imgur)"};this.plainFetcher=v().create({baseURL:a,headers:s,responseType:"json"}),this.fetcher=v().create({baseURL:(null===(o=e.rapidApiKey)||void 0===o?void 0:o.length)?`https://${this.credentials.rapidApiHost}`:a,headers:s,responseType:"json"}),this.fetcher.interceptors.request.use((t=>(0,r.__awaiter)(this,void 0,void 0,(function*(){var r;return t.headers=t.headers?t.headers:{},t.headers.authorization=yield n(this),(null===(r=e.rapidApiKey)||void 0===r?void 0:r.length)&&(t.headers["x-rapidapi-host"]=e.rapidApiHost,t.headers["x-rapidapi-key"]=e.rapidApiKey),t}))),(e=>Promise.reject(e)))}plainRequest(e){return this.plainFetcher(e)}request(e={}){return this.fetcher(e)}deleteImage(e){return function(e,t){return(0,r.__awaiter)(this,void 0,void 0,(function*(){const r=`3/image/${t}`;return u(yield e.request({url:r,method:"DELETE"}).catch((e=>e.response)))}))}(this,e)}favoriteImage(e){return function(e,t){return(0,r.__awaiter)(this,void 0,void 0,(function*(){const r=`3/image/${t}/favorite`;return u(yield e.request({url:r,method:"POST"}).catch((e=>e.response)))}))}(this,e)}getAlbum(e){return function(e,t){return(0,r.__awaiter)(this,void 0,void 0,(function*(){const r=`3/album/${t}`;return u(yield e.request({url:r}).catch((e=>e.response)))}))}(this,e)}getAccount(e){return function(e,t){return(0,r.__awaiter)(this,void 0,void 0,(function*(){const r=`3/account/${t}`;return u(yield e.plainRequest({url:r}).catch((e=>e.response)))}))}(this,e)}getAlbums(e,t){return function(e,t,i){return(0,r.__awaiter)(this,void 0,void 0,(function*(){const r=`3/account/${t}/albums/${null!=i?i:""}`;return u(yield e.request({url:r}).catch((e=>e.response)))}))}(this,e,t)}getAlbumsIds(e,t){return function(e,t,i){return(0,r.__awaiter)(this,void 0,void 0,(function*(){const r=`3/account/${t}/albums/ids/${null!=i?i:""}`;return u(yield e.request({url:r}).catch((e=>e.response)))}))}(this,e,t)}getGallery(e){return function(e,t=p){return(0,r.__awaiter)(this,void 0,void 0,(function*(){const{pathname:r}=function(e){const t=Object.assign({},p,e);let r=`${t.section}`;t.sort&&(r+=`/${t.sort}`),"top"===t.section&&t.window&&(r+=`/${t.window}`),t.page&&(r+=`/${t.page}`);const i=new l.URL(`${a}/3/gallery/${r}`);return void 0!==t.showViral&&i.searchParams.append("showViral",t.showViral.toString()),void 0!==t.mature&&i.searchParams.append("mature",t.mature.toString()),void 0!==t.album_previews&&i.searchParams.append("album_previews",t.album_previews.toString()),i}(t),i=r.slice(1);return u(yield e.request({url:i}).catch((e=>e.response)))}))}(this,e)}getSubredditGallery(e){return function(e,t){return(0,r.__awaiter)(this,void 0,void 0,(function*(){const{pathname:r}=function(e){let t=`${e.subreddit}`;return e.sort&&(t+=`/${e.sort}`),"top"===e.sort&&e.window&&(t+=`/${e.window}`),e.page&&(t+=`/${e.page}`),new l.URL(`${a}/3/gallery/r/${t}`)}(t),i=r.slice(1);return u(yield e.request({url:i}).catch((e=>e.response)))}))}(this,e)}searchGallery(e){return function(e,t){return(0,r.__awaiter)(this,void 0,void 0,(function*(){const{pathname:r}=function(e){let t="";e.sort&&(t+=`/${e.sort}`),"top"===e.sort&&e.window&&(t+=`/${e.window}`),e.page&&(t+=`/${e.page}`);const r=new l.URL(`${a}/3/gallery/search${t}`);if(h.forEach((t=>{var i;(null===(i=e[t])||void 0===i?void 0:i.length)&&r.searchParams.append(t,e[t])})),!r.search){const t=e.q||e.query;if(!t)throw new Error("No query was provided");r.searchParams.append("q",t)}return r}(t),i=r.slice(1);return u(yield e.request({url:i}).catch((e=>e.response)))}))}(this,e)}getImage(e){return function(e,t){return(0,r.__awaiter)(this,void 0,void 0,(function*(){const r=`3/image/${t}`;return u(yield e.request({url:r}).catch((e=>e.response)))}))}(this,e)}updateImage(e){return function(e,t){return(0,r.__awaiter)(this,void 0,void 0,(function*(){if(Array.isArray(t)){const i=t.map((t=>{if(!c(t))throw new Error("Update requires a title and/or description");const i=`3/image/${t.imageHash}`,a=d(t);return new Promise((function(t){return(0,r.__awaiter)(this,void 0,void 0,(function*(){return t(u(yield e.request({url:i,method:"POST",data:a,headers:a.getHeaders()}).catch((e=>e.response))))}))}))}));return yield Promise.all(i).then()}if(!c(t))throw new Error("Update requires a title and/or description");const i=`3/image/${t.imageHash}`,a=d(t);return u(yield e.request({url:i,method:"POST",data:a,headers:a.getHeaders()}).catch((e=>e)))}))}(this,e)}upload(e){return function(e,t){return(0,r.__awaiter)(this,void 0,void 0,(function*(){const i=(t=Array.isArray(t)?t:[t]).map((t=>{var i;const a=d(t),n=t.image,o="string"==typeof n?n:null!==(i=n.path)&&void 0!==i?i:n.name,s="stream"!==t.type||!o||-1===o.indexOf(".mp4")&&-1===o.indexOf(".avi")?"3/image":"3/upload";return new Promise((t=>(0,r.__awaiter)(this,void 0,void 0,(function*(){t(u(yield e.request({url:s,method:"POST",data:a,headers:a.getHeaders(),onUploadProgress:t=>{e.emit("uploadProgress",Object.assign({},t))}}).catch((e=>e.response))))}))))}));return yield Promise.all(i)}))}(this,e)}}const g=m;return t})()}));
+
+/***/ }),
+
+/***/ 5234:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+var CombinedStream = __nccwpck_require__(5443);
+var util = __nccwpck_require__(1669);
+var path = __nccwpck_require__(5622);
+var http = __nccwpck_require__(8605);
+var https = __nccwpck_require__(7211);
+var parseUrl = __nccwpck_require__(8835).parse;
+var fs = __nccwpck_require__(5747);
+var Stream = __nccwpck_require__(2413).Stream;
+var mime = __nccwpck_require__(3583);
+var asynckit = __nccwpck_require__(4812);
+var populate = __nccwpck_require__(2988);
+
+// Public API
+module.exports = FormData;
+
+// make it a Stream
+util.inherits(FormData, CombinedStream);
+
+/**
+ * Create readable "multipart/form-data" streams.
+ * Can be used to submit forms
+ * and file uploads to other web applications.
+ *
+ * @constructor
+ * @param {Object} options - Properties to be added/overriden for FormData and CombinedStream
+ */
+function FormData(options) {
+  if (!(this instanceof FormData)) {
+    return new FormData(options);
+  }
+
+  this._overheadLength = 0;
+  this._valueLength = 0;
+  this._valuesToMeasure = [];
+
+  CombinedStream.call(this);
+
+  options = options || {};
+  for (var option in options) {
+    this[option] = options[option];
+  }
+}
+
+FormData.LINE_BREAK = '\r\n';
+FormData.DEFAULT_CONTENT_TYPE = 'application/octet-stream';
+
+FormData.prototype.append = function(field, value, options) {
+
+  options = options || {};
+
+  // allow filename as single option
+  if (typeof options == 'string') {
+    options = {filename: options};
+  }
+
+  var append = CombinedStream.prototype.append.bind(this);
+
+  // all that streamy business can't handle numbers
+  if (typeof value == 'number') {
+    value = '' + value;
+  }
+
+  // https://github.com/felixge/node-form-data/issues/38
+  if (util.isArray(value)) {
+    // Please convert your array into string
+    // the way web server expects it
+    this._error(new Error('Arrays are not supported.'));
+    return;
+  }
+
+  var header = this._multiPartHeader(field, value, options);
+  var footer = this._multiPartFooter();
+
+  append(header);
+  append(value);
+  append(footer);
+
+  // pass along options.knownLength
+  this._trackLength(header, value, options);
+};
+
+FormData.prototype._trackLength = function(header, value, options) {
+  var valueLength = 0;
+
+  // used w/ getLengthSync(), when length is known.
+  // e.g. for streaming directly from a remote server,
+  // w/ a known file a size, and not wanting to wait for
+  // incoming file to finish to get its size.
+  if (options.knownLength != null) {
+    valueLength += +options.knownLength;
+  } else if (Buffer.isBuffer(value)) {
+    valueLength = value.length;
+  } else if (typeof value === 'string') {
+    valueLength = Buffer.byteLength(value);
+  }
+
+  this._valueLength += valueLength;
+
+  // @check why add CRLF? does this account for custom/multiple CRLFs?
+  this._overheadLength +=
+    Buffer.byteLength(header) +
+    FormData.LINE_BREAK.length;
+
+  // empty or either doesn't have path or not an http response or not a stream
+  if (!value || ( !value.path && !(value.readable && value.hasOwnProperty('httpVersion')) && !(value instanceof Stream))) {
+    return;
+  }
+
+  // no need to bother with the length
+  if (!options.knownLength) {
+    this._valuesToMeasure.push(value);
+  }
+};
+
+FormData.prototype._lengthRetriever = function(value, callback) {
+
+  if (value.hasOwnProperty('fd')) {
+
+    // take read range into a account
+    // `end` = Infinity –> read file till the end
+    //
+    // TODO: Looks like there is bug in Node fs.createReadStream
+    // it doesn't respect `end` options without `start` options
+    // Fix it when node fixes it.
+    // https://github.com/joyent/node/issues/7819
+    if (value.end != undefined && value.end != Infinity && value.start != undefined) {
+
+      // when end specified
+      // no need to calculate range
+      // inclusive, starts with 0
+      callback(null, value.end + 1 - (value.start ? value.start : 0));
+
+    // not that fast snoopy
+    } else {
+      // still need to fetch file size from fs
+      fs.stat(value.path, function(err, stat) {
+
+        var fileSize;
+
+        if (err) {
+          callback(err);
+          return;
+        }
+
+        // update final size based on the range options
+        fileSize = stat.size - (value.start ? value.start : 0);
+        callback(null, fileSize);
+      });
+    }
+
+  // or http response
+  } else if (value.hasOwnProperty('httpVersion')) {
+    callback(null, +value.headers['content-length']);
+
+  // or request stream http://github.com/mikeal/request
+  } else if (value.hasOwnProperty('httpModule')) {
+    // wait till response come back
+    value.on('response', function(response) {
+      value.pause();
+      callback(null, +response.headers['content-length']);
+    });
+    value.resume();
+
+  // something else
+  } else {
+    callback('Unknown stream');
+  }
+};
+
+FormData.prototype._multiPartHeader = function(field, value, options) {
+  // custom header specified (as string)?
+  // it becomes responsible for boundary
+  // (e.g. to handle extra CRLFs on .NET servers)
+  if (typeof options.header == 'string') {
+    return options.header;
+  }
+
+  var contentDisposition = this._getContentDisposition(value, options);
+  var contentType = this._getContentType(value, options);
+
+  var contents = '';
+  var headers  = {
+    // add custom disposition as third element or keep it two elements if not
+    'Content-Disposition': ['form-data', 'name="' + field + '"'].concat(contentDisposition || []),
+    // if no content type. allow it to be empty array
+    'Content-Type': [].concat(contentType || [])
+  };
+
+  // allow custom headers.
+  if (typeof options.header == 'object') {
+    populate(headers, options.header);
+  }
+
+  var header;
+  for (var prop in headers) {
+    if (!headers.hasOwnProperty(prop)) continue;
+    header = headers[prop];
+
+    // skip nullish headers.
+    if (header == null) {
+      continue;
+    }
+
+    // convert all headers to arrays.
+    if (!Array.isArray(header)) {
+      header = [header];
+    }
+
+    // add non-empty headers.
+    if (header.length) {
+      contents += prop + ': ' + header.join('; ') + FormData.LINE_BREAK;
+    }
+  }
+
+  return '--' + this.getBoundary() + FormData.LINE_BREAK + contents + FormData.LINE_BREAK;
+};
+
+FormData.prototype._getContentDisposition = function(value, options) {
+
+  var filename
+    , contentDisposition
+    ;
+
+  if (typeof options.filepath === 'string') {
+    // custom filepath for relative paths
+    filename = path.normalize(options.filepath).replace(/\\/g, '/');
+  } else if (options.filename || value.name || value.path) {
+    // custom filename take precedence
+    // formidable and the browser add a name property
+    // fs- and request- streams have path property
+    filename = path.basename(options.filename || value.name || value.path);
+  } else if (value.readable && value.hasOwnProperty('httpVersion')) {
+    // or try http response
+    filename = path.basename(value.client._httpMessage.path || '');
+  }
+
+  if (filename) {
+    contentDisposition = 'filename="' + filename + '"';
+  }
+
+  return contentDisposition;
+};
+
+FormData.prototype._getContentType = function(value, options) {
+
+  // use custom content-type above all
+  var contentType = options.contentType;
+
+  // or try `name` from formidable, browser
+  if (!contentType && value.name) {
+    contentType = mime.lookup(value.name);
+  }
+
+  // or try `path` from fs-, request- streams
+  if (!contentType && value.path) {
+    contentType = mime.lookup(value.path);
+  }
+
+  // or if it's http-reponse
+  if (!contentType && value.readable && value.hasOwnProperty('httpVersion')) {
+    contentType = value.headers['content-type'];
+  }
+
+  // or guess it from the filepath or filename
+  if (!contentType && (options.filepath || options.filename)) {
+    contentType = mime.lookup(options.filepath || options.filename);
+  }
+
+  // fallback to the default content type if `value` is not simple value
+  if (!contentType && typeof value == 'object') {
+    contentType = FormData.DEFAULT_CONTENT_TYPE;
+  }
+
+  return contentType;
+};
+
+FormData.prototype._multiPartFooter = function() {
+  return function(next) {
+    var footer = FormData.LINE_BREAK;
+
+    var lastPart = (this._streams.length === 0);
+    if (lastPart) {
+      footer += this._lastBoundary();
+    }
+
+    next(footer);
+  }.bind(this);
+};
+
+FormData.prototype._lastBoundary = function() {
+  return '--' + this.getBoundary() + '--' + FormData.LINE_BREAK;
+};
+
+FormData.prototype.getHeaders = function(userHeaders) {
+  var header;
+  var formHeaders = {
+    'content-type': 'multipart/form-data; boundary=' + this.getBoundary()
+  };
+
+  for (header in userHeaders) {
+    if (userHeaders.hasOwnProperty(header)) {
+      formHeaders[header.toLowerCase()] = userHeaders[header];
+    }
+  }
+
+  return formHeaders;
+};
+
+FormData.prototype.setBoundary = function(boundary) {
+  this._boundary = boundary;
+};
+
+FormData.prototype.getBoundary = function() {
+  if (!this._boundary) {
+    this._generateBoundary();
+  }
+
+  return this._boundary;
+};
+
+FormData.prototype.getBuffer = function() {
+  var dataBuffer = new Buffer.alloc( 0 );
+  var boundary = this.getBoundary();
+
+  // Create the form content. Add Line breaks to the end of data.
+  for (var i = 0, len = this._streams.length; i < len; i++) {
+    if (typeof this._streams[i] !== 'function') {
+
+      // Add content to the buffer.
+      if(Buffer.isBuffer(this._streams[i])) {
+        dataBuffer = Buffer.concat( [dataBuffer, this._streams[i]]);
+      }else {
+        dataBuffer = Buffer.concat( [dataBuffer, Buffer.from(this._streams[i])]);
+      }
+
+      // Add break after content.
+      if (typeof this._streams[i] !== 'string' || this._streams[i].substring( 2, boundary.length + 2 ) !== boundary) {
+        dataBuffer = Buffer.concat( [dataBuffer, Buffer.from(FormData.LINE_BREAK)] );
+      }
+    }
+  }
+
+  // Add the footer and return the Buffer object.
+  return Buffer.concat( [dataBuffer, Buffer.from(this._lastBoundary())] );
+};
+
+FormData.prototype._generateBoundary = function() {
+  // This generates a 50 character boundary similar to those used by Firefox.
+  // They are optimized for boyer-moore parsing.
+  var boundary = '--------------------------';
+  for (var i = 0; i < 24; i++) {
+    boundary += Math.floor(Math.random() * 10).toString(16);
+  }
+
+  this._boundary = boundary;
+};
+
+// Note: getLengthSync DOESN'T calculate streams length
+// As workaround one can calculate file size manually
+// and add it as knownLength option
+FormData.prototype.getLengthSync = function() {
+  var knownLength = this._overheadLength + this._valueLength;
+
+  // Don't get confused, there are 3 "internal" streams for each keyval pair
+  // so it basically checks if there is any value added to the form
+  if (this._streams.length) {
+    knownLength += this._lastBoundary().length;
+  }
+
+  // https://github.com/form-data/form-data/issues/40
+  if (!this.hasKnownLength()) {
+    // Some async length retrievers are present
+    // therefore synchronous length calculation is false.
+    // Please use getLength(callback) to get proper length
+    this._error(new Error('Cannot calculate proper length in synchronous way.'));
+  }
+
+  return knownLength;
+};
+
+// Public API to check if length of added values is known
+// https://github.com/form-data/form-data/issues/196
+// https://github.com/form-data/form-data/issues/262
+FormData.prototype.hasKnownLength = function() {
+  var hasKnownLength = true;
+
+  if (this._valuesToMeasure.length) {
+    hasKnownLength = false;
+  }
+
+  return hasKnownLength;
+};
+
+FormData.prototype.getLength = function(cb) {
+  var knownLength = this._overheadLength + this._valueLength;
+
+  if (this._streams.length) {
+    knownLength += this._lastBoundary().length;
+  }
+
+  if (!this._valuesToMeasure.length) {
+    process.nextTick(cb.bind(this, null, knownLength));
+    return;
+  }
+
+  asynckit.parallel(this._valuesToMeasure, this._lengthRetriever, function(err, values) {
+    if (err) {
+      cb(err);
+      return;
+    }
+
+    values.forEach(function(length) {
+      knownLength += length;
+    });
+
+    cb(null, knownLength);
+  });
+};
+
+FormData.prototype.submit = function(params, cb) {
+  var request
+    , options
+    , defaults = {method: 'post'}
+    ;
+
+  // parse provided url if it's string
+  // or treat it as options object
+  if (typeof params == 'string') {
+
+    params = parseUrl(params);
+    options = populate({
+      port: params.port,
+      path: params.pathname,
+      host: params.hostname,
+      protocol: params.protocol
+    }, defaults);
+
+  // use custom params
+  } else {
+
+    options = populate(params, defaults);
+    // if no port provided use default one
+    if (!options.port) {
+      options.port = options.protocol == 'https:' ? 443 : 80;
+    }
+  }
+
+  // put that good code in getHeaders to some use
+  options.headers = this.getHeaders(params.headers);
+
+  // https if specified, fallback to http in any other case
+  if (options.protocol == 'https:') {
+    request = https.request(options);
+  } else {
+    request = http.request(options);
+  }
+
+  // get content length and fire away
+  this.getLength(function(err, length) {
+    if (err && err !== 'Unknown stream') {
+      this._error(err);
+      return;
+    }
+
+    // add content length
+    if (length) {
+      request.setHeader('Content-Length', length);
+    }
+
+    this.pipe(request);
+    if (cb) {
+      var onResponse;
+
+      var callback = function (error, responce) {
+        request.removeListener('error', callback);
+        request.removeListener('response', onResponse);
+
+        return cb.call(this, error, responce);
+      };
+
+      onResponse = callback.bind(this, null);
+
+      request.on('error', callback);
+      request.on('response', onResponse);
+    }
+  }.bind(this));
+
+  return request;
+};
+
+FormData.prototype._error = function(err) {
+  if (!this.error) {
+    this.error = err;
+    this.pause();
+    this.emit('error', err);
+  }
+};
+
+FormData.prototype.toString = function () {
+  return '[object FormData]';
+};
+
+
+/***/ }),
+
+/***/ 2988:
+/***/ ((module) => {
+
+// populates missing values
+module.exports = function(dst, src) {
+
+  Object.keys(src).forEach(function(prop)
+  {
+    dst[prop] = dst[prop] || src[prop];
+  });
+
+  return dst;
 };
 
 
@@ -26158,6 +26732,14 @@ module.exports = eval("require")("encoding");
 
 /***/ }),
 
+/***/ 3576:
+/***/ ((module) => {
+
+module.exports = eval("require")("tslib");
+
+
+/***/ }),
+
 /***/ 8600:
 /***/ ((module) => {
 
@@ -26381,6 +26963,7 @@ var __webpack_exports__ = {};
 (() => {
 const { Client } = __nccwpck_require__(324);
 const { WebClient } = __nccwpck_require__(431);
+const { ImgurClient } = __nccwpck_require__(8370);
 const moment = __nccwpck_require__(9623);
 const ChartJSImage = __nccwpck_require__(2725);
 const log = __nccwpck_require__(8063);
@@ -26876,6 +27459,7 @@ const writeChartToFile = async (chart, dir, filenamePrefix) => {
     fs.mkdirSync(dir);
   }
   await chart.toFile(`${dir}/${filenamePrefix}-burndown.png`);
+  await sendImgure(chart.toBase64Image());
 };
 
 const sendSlackMessage = async (filename,demo,goal) => {
@@ -26899,6 +27483,20 @@ const sendSlackMessage = async (filename,demo,goal) => {
   } catch (error) {
     log.info('error:', error);
   }
+}
+
+const sendImgure = async (filestreambase64) => {
+  const imgClient = new imgur({ clientId: '24326b5607ef0ce' });
+  
+  const imgResponse = await imgClient.upload([
+    {
+      image: filestreambase64,
+      type: 'base64',
+    },
+  ]);
+  imgResponse.data.forEach((r) => {
+    log.info('r.link:', r.link);
+  });
 }
 
 const run = async () => {
