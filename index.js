@@ -524,6 +524,7 @@ const sendSlackMessage = async (filename,demo,goal) => {
 
 const sendImgure = async (filestreambase64) => {
   const imgClient = new ImgurClient({ clientId: '24326b5607ef0ce' });
+  log.info('filestreambase64',filestreambase64);
   const imgResponse = await imgClient.upload([
     {
       image: filestreambase64,
