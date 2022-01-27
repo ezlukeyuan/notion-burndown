@@ -533,8 +533,7 @@ const sendImgure = async (filestreambase64) => {
   ]);
   imgResponse.data.forEach((r) => {
     log.info('r.link:', r.link);
-  };
-  
+  });
 }
 
 const run = async () => {
