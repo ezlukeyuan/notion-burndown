@@ -27746,7 +27746,7 @@ const writeChartToFile = async (chart, dir, filenamePrefix) => {
     fs.mkdirSync(dir);
   }
   await chart.toFile(`${dir}/${filenamePrefix}-burndown.png`);
-  let chart_url = chart.toDataURI().then(chart_url => sendImgure(chart_url))
+  let chart_url = chart.toDataURI().then(chart_url => sendImgure(chart_url));
   // .than(() => {sendImgure(chart_url);});
 };
 
@@ -27784,7 +27784,7 @@ const sendImgure = async (filestreambase64) => {
   ])
   log.info('aaa');
   let myResult = await imgResponse.data;
-  log.info('myResult',myResult);
+  log.info('imgResponse',imgResponse);
   myResult.data.forEach((r) => {
     log.info('r.link:', r.link);
   });
