@@ -532,7 +532,9 @@ const sendImgure = async (filestreambase64) => {
       type: 'base64',
     },
   ])
+  log.info('aaa');
   let myResult = await imgResponse.data;
+  log.info('myResult',myResult);
   myResult.data.forEach((r) => {
     log.info('r.link:', r.link);
   });
