@@ -27762,8 +27762,8 @@ const sendSlackMessage = async (filename,demo,goal) => {
   try {
     // Use the `chat.postMessage` method to send a message from this app
     await web.chat.postMessage({
-      // channel: 'C01TM4WSVH6',
-      channel: 'C0234HEGCT0',
+      channel: 'C01TM4WSVH6',
+      // channel: 'C0234HEGCT0',
       text:'每日Sprint目標',
       blocks: message
     });
@@ -27776,7 +27776,7 @@ const sendSlackMessage = async (filename,demo,goal) => {
 const sendImgure = async (filestreambase64) => {
   const imgClient = new ImgurClient({ clientId: '24326b5607ef0ce' });
   // log.info('filestreambase64',filestreambase64);
-  log.info(imgClient);
+  // log.info(imgClient);
   log.info('aaa');
   const imgResponse = await imgClient.upload([
     {
