@@ -526,13 +526,14 @@ const sendSlackMessage = async (filename,demo,goal) => {
 const sendImgure = async (filestreambase64) => {
   const imgClient = new ImgurClient({ clientId: '24326b5607ef0ce' });
   // log.info('filestreambase64',filestreambase64);
+  log.info('aaa');
   const imgResponse = await imgClient.upload([
     {
       image: filestreambase64,
       type: 'base64',
     },
   ]);
-  log.info('aaa');
+  log.info('bbb');
   let myResult = await imgResponse.data;
   log.info('imgResponse',imgResponse);
   myResult.data.forEach((r) => {
